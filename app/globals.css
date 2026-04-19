@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "katex/dist/katex.min.css";
+@import "reactflow/dist/style.css";
+
+@layer base {
+  :root {
+    /* Light — muted paper terminal */
+    --background: 40 12% 97%;
+    --foreground: 220 20% 14%;
+    --card: 40 10% 99%;
+    --card-foreground: 220 20% 14%;
+    --popover: 40 10% 99%;
+    --popover-foreground: 220 20% 14%;
+    --primary: 155 60% 32%;
+    --primary-foreground: 40 12% 97%;
+    --secondary: 220 10% 92%;
+    --secondary-foreground: 220 20% 14%;
+    --muted: 220 10% 93%;
+    --muted-foreground: 220 10% 42%;
+    --accent: 155 30% 88%;
+    --accent-foreground: 155 60% 22%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 40 12% 97%;
+    --border: 220 10% 86%;
+    --input: 220 10% 86%;
+    --ring: 155 60% 32%;
+    --radius: 0.25rem;
+  }
+
+  .dark {
+    /* Dark — terminal */
+    --background: 220 18% 7%;
+    --foreground: 140 15% 88%;
+    --card: 220 18% 9%;
+    --card-foreground: 140 15% 88%;
+    --popover: 220 18% 9%;
+    --popover-foreground: 140 15% 88%;
+    --primary: 150 70% 55%;
+    --primary-foreground: 220 18% 7%;
+    --secondary: 220 15% 13%;
+    --secondary-foreground: 140 15% 88%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 150 40% 18%;
+    --accent-foreground: 150 70% 75%;
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 140 15% 88%;
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 150 70% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01" 1, "ss02" 1, "cv11" 1;
+    font-family:
+      ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas,
+      "Liberation Mono", monospace;
+  }
+
+  /* Faint grid background for that blueprint/terminal vibe */
+  body {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+  }
+
+  code,
+  pre,
+  kbd {
+    font-family:
+      ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+  }
+}
+
+@layer components {
+  /* Article typography for blog-style pages */
+  .prose-nerd {
+    @apply text-foreground leading-7;
+  }
+  .prose-nerd h1 {
+    @apply font-mono text-3xl font-semibold tracking-tight mt-0 mb-4 md:text-4xl;
+  }
+  .prose-nerd h2 {
+    @apply font-mono text-2xl font-semibold tracking-tight mt-14 mb-4 pb-2 border-b border-border;
+  }
+  .prose-nerd h2::before {
+    content: "## ";
+    @apply text-primary/70;
+  }
+  .prose-nerd h3 {
+    @apply font-mono text-lg font-semibold mt-8 mb-2;
+  }
+  .prose-nerd h3::before {
+    content: "### ";
+    @apply text-muted-foreground;
+  }
+  .prose-nerd p {
+    @apply leading-7 my-4 text-[0.95rem];
+  }
+  .prose-nerd ul {
+    @apply my-4 list-disc pl-6 space-y-1;
+  }
+  .prose-nerd ol {
+    @apply my-4 list-decimal pl-6 space-y-1;
+  }
+  .prose-nerd a {
+    @apply text-primary underline decoration-dotted underline-offset-4 hover:text-primary/80;
+  }
+  .prose-nerd code {
+    @apply rounded-sm bg-muted px-1.5 py-0.5 text-[0.875em] text-foreground;
+  }
+  .prose-nerd pre {
+    @apply my-4 rounded-sm border border-border bg-muted/40 p-4 text-sm overflow-x-auto;
+  }
+  .prose-nerd pre code {
+    @apply bg-transparent p-0;
+  }
+  .prose-nerd blockquote {
+    @apply my-4 border-l-2 border-primary/60 bg-muted/30 pl-4 py-2 text-muted-foreground;
+  }
+
+  /* Legacy alias kept for existing KB pages */
+  .prose-kb {
+    @apply text-foreground leading-7;
+  }
+  .prose-kb h1 {
+    @apply font-mono text-3xl font-semibold tracking-tight mt-0 mb-4;
+  }
+  .prose-kb h2 {
+    @apply font-mono text-2xl font-semibold tracking-tight mt-10 border-b border-border pb-2;
+  }
+  .prose-kb h3 {
+    @apply font-mono text-lg font-semibold mt-6;
+  }
+  .prose-kb p {
+    @apply leading-7 my-4;
+  }
+
+  .gradient-text {
+    @apply text-primary;
+  }
+
+  .eml-node {
+    @apply rounded-sm border border-border bg-card px-3 py-2 shadow-none font-mono text-sm;
+  }
+
+  /* Prompt-style marker used around the site */
+  .prompt::before {
+    content: "$ ";
+    @apply text-primary;
+  }
+}
+
+.react-flow__node {
+  @apply !border-none !p-0 !bg-transparent;
+}
+.react-flow__edge-path {
+  stroke: hsl(var(--muted-foreground));
+  stroke-width: 1.5;
+}
+.dark .react-flow__edge-path {
+  stroke: hsl(var(--muted-foreground));
+}
