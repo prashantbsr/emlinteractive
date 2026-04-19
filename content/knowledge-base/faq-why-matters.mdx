@@ -1,0 +1,29 @@
+# Why does this matter for CS students?
+
+Four concrete reasons to pay attention.
+
+## 1. Universality & minimal bases
+
+Every CS student learns that NAND and NOR are "universal" gates. EML is the continuous analog. Seeing how a single operator spans all of elementary math is a direct lesson in what *universality* really means: not a feature of the operator, but of the structure of the space it operates in.
+
+## 2. Compilers get simpler
+
+If every elementary expression compiles down to a single binary operator, then a target architecture only needs **one** instruction to evaluate mathematics. That's a dramatic simplification for:
+
+- Embedded systems with minimal silicon budget
+- Custom hardware accelerators
+- Analog computing
+
+A compiler is provided in the paper's repository.
+
+## 3. Symbolic regression & ML
+
+Tools like PySR and AI Feynman search for formulas in a large primitive space. EML shrinks that space to a single primitive, changing the structure of the search. For anyone working on scientific ML or discovery tools, this is a new substrate to experiment with.
+
+## 4. Hardware / analog circuits
+
+EML trees map 1-to-1 onto analog circuits where every node is the same component. That's a uniform-component design — something ASIC and analog-computing engineers actively want. See [paper overview §6](/kb/paper-overview).
+
+## Bonus: it's pedagogical gold
+
+The reduction from 36 → 2 is a lovely exercise in "what is necessary vs. what we just happened to inherit." Every time you rebuild a familiar function as an EML tree, you're reminded that the usual calculator basis was a choice, not a theorem.
