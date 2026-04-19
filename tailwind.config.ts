@@ -53,9 +53,41 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        sans: [
+          "ui-monospace",
+          "JetBrains Mono",
+          "SF Mono",
+          "Menlo",
+          "Consolas",
+          "monospace",
+        ],
+        mono: [
+          "ui-monospace",
+          "JetBrains Mono",
+          "SF Mono",
+          "Menlo",
+          "Consolas",
+          "monospace",
+        ],
+      },
+      keyframes: {
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(4px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "pulse-soft": {
+          "0%, 100%": { opacity: "0.6" },
+          "50%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.4s ease-out",
+        "pulse-soft": "pulse-soft 2.4s ease-in-out infinite",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 
 export default config;
