@@ -1,0 +1,33 @@
+# Complexity depths of elementary functions
+
+Table 4 of the paper reports the minimum EML tree depth for each elementary function that was checked.
+
+## The headline numbers
+
+| Function | Depth | Tree size (approx) |
+|----------|-------|---------------------|
+| `exp(x)` | 1 | 3 |
+| `e` | 1 | 3 |
+| `negate(x)` | 2 | — |
+| `reciprocal(x)` | 2 | — |
+| `ln(x)` | 3 | 7 |
+| `subtract(x, y)` | 4 | — |
+| `add(x, y)` | 5 | — |
+| `divide(x, y)` | 7 | — |
+| `multiply(x, y)` | 8 | — |
+
+## Surprises worth noting
+
+- **`exp` is the shallowest.** That's unusual — in most bases, multiplication would be primitive and `exp` would be built on top. In EML it's the other way around.
+- **`multiply` is the deepest** of basic arithmetic. This inverts our usual sense of "simple" and "complex". Addition is deeper than negation; multiplication is deeper than addition.
+- **The constant `e` is cheap** (depth 1), but `0` takes depth 3. `π` is deeper still and requires a complex-valued intermediate.
+
+## What depth actually counts
+
+Depth is the longest root-to-leaf path, counting `eml` nodes only. It's related to but distinct from tree *size* (total node count) and *leaf count* (number of 1-literals).
+
+## Why this re-orders "simplicity"
+
+In standard bases we measure simplicity by how short a textbook formula is. EML measures it by how few compositions of `exp(·) − ln(·)` you need. The two metrics disagree, and that disagreement is itself evidence that EML captures a different notion of structure.
+
+See the [Playground](/playground) — after any expression, you'll see its depth and size reported below the value.
