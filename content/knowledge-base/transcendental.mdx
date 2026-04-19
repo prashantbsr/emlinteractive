@@ -1,0 +1,23 @@
+# Transcendental constant
+
+A number is **transcendental** if it is not the root of any non-zero polynomial with integer coefficients.
+
+## Common examples
+
+- `π ≈ 3.14159…` — proved transcendental by Ferdinand von Lindemann in 1882.
+- `e ≈ 2.71828…` — proved transcendental by Charles Hermite in 1873.
+- `e^π` — transcendental (Gelfond's theorem).
+
+## Not transcendental
+
+- `√2` — algebraic; root of `x² − 2`.
+- `φ` (golden ratio) — algebraic; root of `x² − x − 1`.
+- Any rational number — trivially algebraic.
+
+## Why it shows up in EML
+
+`e` drops out of the EML operator itself: `eml(1, 1) = exp(1) − ln(1) = e`. So the constant `e` is depth 1 in EML.
+
+The paper's search replaces the traditional choice of "which transcendental to keep" (usually `e` or `π`) with a structural choice: keep `1`, and let the operator produce transcendentals on demand.
+
+Producing `π` from EML requires going through complex intermediates — see [Euler's formula and why EML needs complex arithmetic](/kb/math-eulers-formula).
