@@ -105,4 +105,49 @@ export const articles: Article[] = [
     searchText:
       "symbolic regression formula discovery data fitting machine learning",
   },
+  {
+    slug: "faq-why-matters",
+    title: "Why does this matter for CS students?",
+    category: "faq",
+    summary:
+      "Four reasons to care: universality, compilers, symbolic regression, and the analogy with Boolean logic.",
+    tags: ["motivation", "cs"],
+    searchText: "why matter CS students application motivation use case",
+  },
+  {
+    slug: "faq-practical",
+    title: "Is EML practical to use?",
+    category: "faq",
+    summary:
+      "Short answer: not as a replacement calculator, but as a theoretical object and a compiler target, yes.",
+    tags: ["practical", "compiler"],
+    searchText: "practical use compiler target theoretical calculator replacement",
+  },
+  {
+    slug: "math-exp-ln",
+    title: "exp and ln: the two halves of eml",
+    category: "math",
+    summary:
+      "Refresher on exp and ln — their key identities power every derivation in this paper.",
+    tags: ["exp", "ln", "background"],
+    searchText: "exp ln exponential logarithm identity natural base e",
+  },
+  {
+    slug: "math-eulers-formula",
+    title: "Euler's formula and why EML needs complex arithmetic",
+    category: "math",
+    summary:
+      "To reach sin, cos, and π, EML temporarily goes through complex numbers via e^(ix) = cos x + i sin x.",
+    tags: ["euler", "complex", "trig"],
+    searchText: "Euler formula complex numbers trigonometric sine cosine imaginary unit",
+  },
+  {
+    slug: "about",
+    title: "About EMLinteractive",
+    category: "about",
+    summary:
+      "Who this app is for, what v1 covers, and what's coming next.",
+    tags: ["about", "roadmap"],
+    searchText: "about project roadmap v1 v2 credits",
+  },
 ];
