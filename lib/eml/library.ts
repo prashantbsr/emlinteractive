@@ -168,3 +168,37 @@ export const referenceDepths: Record<string, number> = {
   divide: 7,
   multiply: 8,
 };
+
+// Functions from Table 4 that v1 does not yet ship verified concrete trees for.
+export const pendingFunctions: { name: string; depth: number; note: string }[] = [
+  {
+    name: "negate",
+    depth: 2,
+    note: "Depth-2 construction via subtractive identities — verified tree pending v2.",
+  },
+  {
+    name: "reciprocal",
+    depth: 2,
+    note: "Builds on negate(ln(x)) composed with exp — verified tree pending v2.",
+  },
+  {
+    name: "subtract",
+    depth: 4,
+    note: "Requires negate as a sub-tree — pending v2.",
+  },
+  {
+    name: "add",
+    depth: 5,
+    note: "Builds on subtract — pending v2.",
+  },
+  {
+    name: "divide",
+    depth: 7,
+    note: "Builds on reciprocal and multiply — pending v2.",
+  },
+  {
+    name: "multiply",
+    depth: 8,
+    note: "Deepest of the basics — pending v2.",
+  },
+];
