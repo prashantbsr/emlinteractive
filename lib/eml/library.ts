@@ -35,8 +35,8 @@ export function referenceValue(slug: string, env: Record<string, number>): numbe
 const X = (): EMLNode => variable("x");
 const ONE = (): EMLNode => one();
 
-// exp(x) = eml(x, 1)
 const expTree: EMLNode = eml(X(), ONE());
+const eConst: EMLNode = eml(ONE(), ONE());
 
 export const library: EMLFunctionSpec[] = [
   {
@@ -60,6 +60,28 @@ export const library: EMLFunctionSpec[] = [
       "Plug in y = 1: eml(x, 1) = exp(x) − ln(1).",
       "Since ln(1) = 0: eml(x, 1) = exp(x).",
       "Depth 1 — this is the shallowest non-trivial EML tree.",
+    ],
+  },
+  {
+    slug: "e",
+    name: "e",
+    displayName: "Euler's constant e",
+    symbol: "e",
+    formula: "eml(1, 1)",
+    latex: "e",
+    depth: 1,
+    arity: 0,
+    tree: eConst,
+    variables: [],
+    domain: "—",
+    sampleInputs: {},
+    category: "constant",
+    description:
+      "Euler's number appears immediately: eml(1, 1) = exp(1) − ln(1) = e − 0 = e.",
+    derivation: [
+      "Substitute x = 1, y = 1 in eml(x, y) = exp(x) − ln(y).",
+      "exp(1) = e, ln(1) = 0.",
+      "Therefore eml(1, 1) = e.",
     ],
   },
 ];
