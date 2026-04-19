@@ -57,4 +57,52 @@ export const articles: Article[] = [
     tags: ["depth", "complexity", "table"],
     searchText: "depth table complexity exp 1 ln 3 multiplication 8 division 7",
   },
+  {
+    slug: "sheffer-stroke",
+    title: "Sheffer stroke",
+    category: "glossary",
+    summary:
+      "A single operator that is enough to express all operations in a system. NAND for Boolean. EML for continuous.",
+    tags: ["sheffer", "nand", "primitive"],
+    searchText:
+      "Sheffer stroke NAND single operator functional completeness universal",
+  },
+  {
+    slug: "elementary-function",
+    title: "Elementary function",
+    category: "glossary",
+    summary:
+      "The class of functions built from rational operations, exponentials, logarithms, and trigonometric functions.",
+    tags: ["elementary", "function"],
+    searchText:
+      "elementary function exp log trig polynomial rational closed form",
+  },
+  {
+    slug: "binary-tree",
+    title: "Binary tree (in EML)",
+    category: "glossary",
+    summary: "Every EML expression is a binary tree whose leaves are 1 and whose internal nodes are eml.",
+    tags: ["tree", "grammar"],
+    searchText: "binary tree grammar leaves internal nodes depth size",
+  },
+  {
+    slug: "transcendental",
+    title: "Transcendental constant",
+    category: "glossary",
+    summary:
+      "A number that is not the root of any non-zero polynomial with integer coefficients. π and e are transcendental.",
+    tags: ["transcendental", "pi", "e"],
+    searchText:
+      "transcendental pi e constant irrational algebraic polynomial root",
+  },
+  {
+    slug: "symbolic-regression",
+    title: "Symbolic regression",
+    category: "glossary",
+    summary:
+      "Finding a closed-form formula that fits data. The paper uses EML as the search space.",
+    tags: ["regression", "ml"],
+    searchText:
+      "symbolic regression formula discovery data fitting machine learning",
+  },
 ];
