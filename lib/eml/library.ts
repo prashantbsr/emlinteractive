@@ -202,3 +202,7 @@ export const pendingFunctions: { name: string; depth: number; note: string }[] =
     note: "Deepest of the basics — pending v2.",
   },
 ];
+
+export function getFunction(slug: string): EMLFunctionSpec | undefined {
+  return library.find((f) => f.slug === slug);
+}
