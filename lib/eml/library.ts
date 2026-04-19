@@ -155,3 +155,16 @@ export const library: EMLFunctionSpec[] = [
     ],
   },
 ];
+
+// Table 4 reference values from the paper — exact depths for the symbolic record.
+export const referenceDepths: Record<string, number> = {
+  exp: 1,
+  e: 1,
+  negate: 2,
+  reciprocal: 2,
+  ln: 3,
+  subtract: 4,
+  add: 5,
+  divide: 7,
+  multiply: 8,
+};
