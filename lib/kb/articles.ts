@@ -151,3 +151,19 @@ export const articles: Article[] = [
     searchText: "about project roadmap v1 v2 credits",
   },
 ];
+
+export function getArticle(slug: string): Article | undefined {
+  return articles.find((a) => a.slug === slug);
+}
+
+export function groupByCategory(): Record<ArticleCategory, Article[]> {
+  const out: Record<ArticleCategory, Article[]> = {
+    paper: [],
+    glossary: [],
+    faq: [],
+    math: [],
+    about: [],
+  };
+  for (const a of articles) out[a.category].push(a);
+  return out;
+}
