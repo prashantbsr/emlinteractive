@@ -39,6 +39,7 @@ const expTree: EMLNode = eml(X(), ONE());
 const eConst: EMLNode = eml(ONE(), ONE());
 const zeroConst: EMLNode = eml(ONE(), eml(eml(ONE(), ONE()), ONE()));
 const lnTree: EMLNode = eml(ONE(), eml(eml(ONE(), X()), ONE()));
+const identityTree: EMLNode = eml(ONE(), eml(eml(ONE(), eml(X(), ONE())), ONE()));
 
 export const library: EMLFunctionSpec[] = [
   {
@@ -129,6 +130,28 @@ export const library: EMLFunctionSpec[] = [
       "Let a = eml(1, x) = e − ln(x).",
       "Let b = eml(a, 1) = exp(a) − 0 = exp(e − ln(x)).",
       "Then eml(1, b) = e − ln(b) = e − (e − ln(x)) = ln(x).",
+    ],
+  },
+  {
+    slug: "identity",
+    name: "id",
+    displayName: "Identity function",
+    symbol: "x",
+    formula: "eml(1, eml(eml(1, eml(x, 1)), 1))",
+    latex: "x",
+    depth: 4,
+    arity: 1,
+    tree: identityTree,
+    variables: ["x"],
+    domain: "x ∈ ℝ⁺",
+    sampleInputs: { x: 2.5 },
+    category: "unary",
+    description:
+      "Even the identity function f(x) = x takes non-trivial nesting in pure EML: ln(exp(x)) = x.",
+    derivation: [
+      "Substitute z = exp(x) = eml(x, 1) into the ln(z) tree.",
+      "ln(exp(x)) = x by the fundamental log–exp identity.",
+      "Result: a depth-4 tree whose value equals x for any x.",
     ],
   },
 ];
