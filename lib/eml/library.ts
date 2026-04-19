@@ -35,4 +35,31 @@ export function referenceValue(slug: string, env: Record<string, number>): numbe
 const X = (): EMLNode => variable("x");
 const ONE = (): EMLNode => one();
 
-export const library: EMLFunctionSpec[] = [];
+// exp(x) = eml(x, 1)
+const expTree: EMLNode = eml(X(), ONE());
+
+export const library: EMLFunctionSpec[] = [
+  {
+    slug: "exp",
+    name: "exp",
+    displayName: "Exponential",
+    symbol: "exp(x)",
+    formula: "eml(x, 1)",
+    latex: "e^{x}",
+    depth: 1,
+    arity: 1,
+    tree: expTree,
+    variables: ["x"],
+    domain: "x ∈ ℝ",
+    sampleInputs: { x: 1 },
+    category: "transcendental",
+    description:
+      "The exponential function — the simplest function to build in EML. A single node does it.",
+    derivation: [
+      "Start from the definition: eml(x, y) = exp(x) − ln(y).",
+      "Plug in y = 1: eml(x, 1) = exp(x) − ln(1).",
+      "Since ln(1) = 0: eml(x, 1) = exp(x).",
+      "Depth 1 — this is the shallowest non-trivial EML tree.",
+    ],
+  },
+];
