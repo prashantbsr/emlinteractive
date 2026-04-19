@@ -38,6 +38,7 @@ const ONE = (): EMLNode => one();
 const expTree: EMLNode = eml(X(), ONE());
 const eConst: EMLNode = eml(ONE(), ONE());
 const zeroConst: EMLNode = eml(ONE(), eml(eml(ONE(), ONE()), ONE()));
+const lnTree: EMLNode = eml(ONE(), eml(eml(ONE(), X()), ONE()));
 
 export const library: EMLFunctionSpec[] = [
   {
@@ -106,6 +107,28 @@ export const library: EMLFunctionSpec[] = [
       "Inner: eml(1, 1) = e.",
       "Next: eml(e, 1) = exp(e) − ln(1) = exp(e).",
       "Outer: eml(1, exp(e)) = exp(1) − ln(exp(e)) = e − e = 0.",
+    ],
+  },
+  {
+    slug: "ln",
+    name: "ln",
+    displayName: "Natural logarithm",
+    symbol: "ln(x)",
+    formula: "eml(1, eml(eml(1, x), 1))",
+    latex: "\\ln(x)",
+    depth: 3,
+    arity: 1,
+    tree: lnTree,
+    variables: ["x"],
+    domain: "x ∈ ℝ⁺",
+    sampleInputs: { x: Math.E },
+    category: "transcendental",
+    description:
+      "The natural log reassembles itself in three nested EML calls — a clean contrast to exp's single-node form.",
+    derivation: [
+      "Let a = eml(1, x) = e − ln(x).",
+      "Let b = eml(a, 1) = exp(a) − 0 = exp(e − ln(x)).",
+      "Then eml(1, b) = e − ln(b) = e − (e − ln(x)) = ln(x).",
     ],
   },
 ];
