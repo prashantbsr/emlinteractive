@@ -1,0 +1,30 @@
+# Euler's formula and why EML needs complex arithmetic
+
+One of the prettier facts in all of mathematics:
+
+```
+e^(iθ) = cos(θ) + i·sin(θ)
+```
+
+This is **Euler's formula**. Set θ = π and it gives Euler's identity `e^(iπ) + 1 = 0`.
+
+## Why it shows up in EML
+
+To reach trig functions `sin` and `cos` from `exp` and `ln`, you invert Euler's formula:
+
+```
+cos(x) = (exp(ix) + exp(−ix)) / 2
+sin(x) = (exp(ix) − exp(−ix)) / (2i)
+```
+
+Both require `exp` of a complex number. Since EML nests `exp(x) − ln(y)`, and both `exp` and `ln` extend naturally to ℂ, the paper allows intermediate computations to pass through complex values — even when the final answer is real.
+
+## Why this is surprising
+
+You might expect "the single operator for real-valued elementary functions" to stay in ℝ. It can't. The paper is explicit: complex arithmetic internally is necessary.
+
+This is a feature, not a bug. It's what lets a single operator reach all the way to sin, cos, and π.
+
+## What this means for implementation
+
+A practical EML engine must support complex arithmetic at evaluation time. For the V1 of this teaching app, we stay in ℝ — every tree in the [Function Gallery](/gallery) is chosen to avoid complex intermediates. For the trig functions, we point to the paper rather than showing the tree directly.
