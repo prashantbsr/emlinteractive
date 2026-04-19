@@ -37,6 +37,7 @@ const ONE = (): EMLNode => one();
 
 const expTree: EMLNode = eml(X(), ONE());
 const eConst: EMLNode = eml(ONE(), ONE());
+const zeroConst: EMLNode = eml(ONE(), eml(eml(ONE(), ONE()), ONE()));
 
 export const library: EMLFunctionSpec[] = [
   {
@@ -82,6 +83,29 @@ export const library: EMLFunctionSpec[] = [
       "Substitute x = 1, y = 1 in eml(x, y) = exp(x) − ln(y).",
       "exp(1) = e, ln(1) = 0.",
       "Therefore eml(1, 1) = e.",
+    ],
+  },
+  {
+    slug: "zero",
+    name: "zero",
+    displayName: "Constant 0",
+    symbol: "0",
+    formula: "eml(1, eml(eml(1, 1), 1))",
+    latex: "0",
+    depth: 3,
+    arity: 0,
+    tree: zeroConst,
+    variables: [],
+    domain: "—",
+    sampleInputs: {},
+    category: "constant",
+    description:
+      "Zero isn't a primitive in EML — it takes depth 3 to build. This is surprising and fundamental to how EML reshapes what 'simple' means.",
+    derivation: [
+      "Goal: produce 0.",
+      "Inner: eml(1, 1) = e.",
+      "Next: eml(e, 1) = exp(e) − ln(1) = exp(e).",
+      "Outer: eml(1, exp(e)) = exp(1) − ln(exp(e)) = e − e = 0.",
     ],
   },
 ];
