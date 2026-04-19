@@ -1,0 +1,33 @@
+# Is EML practical to use?
+
+Short answer: **it depends on what "use" means.**
+
+## As a daily calculator — no
+
+Nobody is going to replace `sin(x)` with a depth-12 EML tree on a pocket calculator. The representation is:
+
+- Numerically less stable (deep exp/ln compositions amplify floating-point error)
+- Slower to evaluate than a lookup table
+- Harder for humans to read
+
+## As a compiler target — yes
+
+If your output is *machine code* that will be executed, EML is attractive:
+
+- One instruction type. Simpler CPU, simpler ASIC, simpler FPGA bitstream.
+- Fewer edge cases in the compiler back-end.
+- Potential for specialized analog hardware where a single physical element implements the entire operator.
+
+## As a theoretical tool — yes
+
+The EML framing gives new answers to:
+
+- "What is the minimal basis for this class of functions?"
+- "How do we measure formula complexity?"
+- "Can we compress a search space for formula discovery?"
+
+Those are the settings where EML genuinely changes what you can do — not "use it instead of your calculator" but "use it when what you care about is structure."
+
+## The trade-off in one line
+
+EML wins on *uniformity* and loses on *efficiency*. Any application that values the former over the latter is a candidate.
