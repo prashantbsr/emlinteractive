@@ -47,6 +47,7 @@ function tokenize(input: string): Token[] {
     if (/[0-9.]/.test(ch)) {
       let j = i;
       while (j < input.length && /[0-9.eE+-]/.test(input[j])) {
+        // Stop on + / - if not part of exponent
         if ((input[j] === "+" || input[j] === "-") && j > i && !/[eE]/.test(input[j - 1])) {
           break;
         }
@@ -75,6 +76,60 @@ function tokenize(input: string): Token[] {
 
 export function parse(input: string): EMLNode {
   const tokens = tokenize(input);
-  if (tokens.length === 0) throw new EMLParseError("Empty input", 0);
-  throw new EMLParseError("parser incomplete", 0);
+  let pos = 0;
+
+  function peek(): Token | undefined {
+    return tokens[pos];
+  }
+  function consume(): Token {
+    const t = tokens[pos++];
+    if (!t) throw new EMLParseError("Unexpected end of input", input.length);
+    return t;
+  }
+  function expect(type: Token["type"]): Token {
+    const t = consume();
+    if (t.type !== type) {
+      throw new EMLParseError(`Expected ${type} but got ${t.type}`, t.pos);
+    }
+    return t;
+  }
+
+  function parseExpr(): EMLNode {
+    const t = peek();
+    if (!t) throw new EMLParseError("Unexpected end of input", input.length);
+
+    if (t.type === "number") {
+      consume();
+      return { kind: "const", value: t.value };
+    }
+    if (t.type === "minus") {
+      consume();
+      const next = consume();
+      if (next.type !== "number") {
+        throw new EMLParseError("Expected number after '-'", next.pos);
+      }
+      return { kind: "const", value: -next.value };
+    }
+    if (t.type === "ident") {
+      consume();
+      if (t.value === "eml") {
+        expect("lparen");
+        const left = parseExpr();
+        expect("comma");
+        const right = parseExpr();
+        expect("rparen");
+        return { kind: "eml", left, right };
+      }
+      // treat other identifiers as variables (e.g. x, y)
+      return { kind: "var", name: t.value };
+    }
+    throw new EMLParseError(`Unexpected token '${t.type}'`, t.pos);
+  }
+
+  const result = parseExpr();
+  if (pos < tokens.length) {
+    const extra = tokens[pos];
+    throw new EMLParseError(`Unexpected token '${extra.type}'`, extra.pos);
+  }
+  return result;
 }
