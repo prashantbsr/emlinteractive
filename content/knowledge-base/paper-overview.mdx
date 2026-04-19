@@ -1,0 +1,47 @@
+# Paper overview, section by section
+
+The paper is concise. Here is a map of its sections and why each matters.
+
+## §1 Introduction & motivation
+
+Sets up the analogy: Boolean logic has NAND. Continuous math has… nothing, until now. Asks: what is the minimal basis for elementary functions?
+
+## §2 The reduction sequence
+
+The core search. Starting from a "scientific calculator" set of 36 primitives, the author iteratively removes redundant operations, showing each removal is safe.
+
+- **Calc 3**: 6 primitives `{exp, ln, negation, reciprocal, +, constants}`
+- **Calc 2**: 4 primitives `{exp, ln, subtraction, constants}`
+- **Calc 1**: 3 primitives `{exponentiation, logarithm, e or π}`
+- **Calc 0**: 3 primitives `{exp function, logarithm, constants}`
+- **EML**: **2 primitives** `{eml, 1}`
+
+See [The reduction: 36 → 2](/kb/reduction-journey) for the intuition behind each drop.
+
+## §3 The EML operator
+
+Defines `eml(x, y) = exp(x) − ln(y)` and demonstrates the grammar `S → 1 | eml(S, S)` produces a class of binary trees that covers every elementary function.
+
+## §4 Master formula and symbolic regression
+
+Shows how to set up EML trees with parametric inputs `α + β·x + γ·f(...)` so that gradient-based optimization can rediscover a formula from its values at sampled points.
+
+## §5 Cousin operators
+
+Two operators with the same Sheffer-like property:
+- **EDL**: `exp(x) / ln(y)` with constant `e`
+- **Negated EML**: `ln(x) − exp(y)` with constant `−∞`
+
+## §6 Compiler and analog circuits
+
+A Python compiler converts standard mathematical expressions into pure EML trees. These trees map 1-to-1 onto analog circuits where every node is the same physical element.
+
+## §7 Open questions
+
+- Is there a binary Sheffer operator that needs *no* constant?
+- Is there a univariate activation function that is both a good neural-net activation and a function generator?
+- Are there continuous families of Sheffer operators?
+
+## Reproducibility
+
+Code, Mathematica notebooks, and Rust implementation are deposited in the SymbolicRegressionPackage repository and on Zenodo (DOI: 10.5281/zenodo.19183008).
