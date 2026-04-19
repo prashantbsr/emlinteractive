@@ -9,3 +9,8 @@ export function treeSize(node: EMLNode): number {
   if (node.kind !== "eml") return 1;
   return 1 + treeSize(node.left) + treeSize(node.right);
 }
+
+export function leafCount(node: EMLNode): number {
+  if (node.kind !== "eml") return 1;
+  return leafCount(node.left) + leafCount(node.right);
+}
