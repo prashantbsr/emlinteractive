@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "description": "Interactive learning playground for the EML operator from Odrzywolek's paper on elementary-function completeness.",
+  "keywords": [
+    "eml",
+    "elementary-functions",
+    "symbolic-computation",
+    "sheffer-stroke",
+    "nextjs",
+    "education"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
