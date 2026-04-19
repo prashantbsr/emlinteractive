@@ -1,0 +1,27 @@
+# Symbolic regression
+
+**Symbolic regression** is the problem of finding a closed-form mathematical expression that fits a set of observed data points.
+
+## Contrast with regular regression
+
+Traditional regression fits *coefficients* in a fixed model: "what `a, b` minimize `|y − (a·x + b)|²`?"
+
+Symbolic regression fits the *form* itself: "what function `f` best fits these (x, y) pairs?"
+
+## How EML helps
+
+The paper proposes using EML trees as the search space. Every candidate formula is a binary tree of `eml` calls — a simple combinatorial object that you can:
+
+1. Enumerate (shallow trees first)
+2. Mutate (swap subtrees, introduce variables)
+3. Optimize numerically (gradient descent on the constants inside each leaf via the master formula)
+
+## Results from the paper
+
+- **Depth-2 trees**: 100% blind recovery on common test targets.
+- **Depth-3 to depth-4 trees**: ~25% recovery.
+- **Successful runs converge to near machine-epsilon error** (≈ 10⁻³²), meaning the formula is rediscovered *exactly*, not just approximately.
+
+## Why a fixed basis helps
+
+Most symbolic-regression engines (like PySR or AI Feynman) use a handful of primitives per tree node, which explodes the search space. EML has *one* primitive — so the branching factor at each node is much smaller, making the search tractable even though trees must be deeper.
