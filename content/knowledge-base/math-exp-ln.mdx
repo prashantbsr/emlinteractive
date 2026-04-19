@@ -1,0 +1,40 @@
+# exp and ln: the two halves of eml
+
+The EML operator is built directly from two functions you already know: `exp` and `ln`. A quick refresher on their identities will make every derivation in the paper feel natural.
+
+## Definitions
+
+- **exp(x)** = `e^x` — the continuous extension of repeated multiplication.
+- **ln(x)** = the inverse of exp. `ln(x)` is the unique number such that `e^(ln x) = x`.
+
+Their domain/range:
+
+- `exp: ℝ → ℝ⁺` (always positive)
+- `ln: ℝ⁺ → ℝ` (requires positive input)
+
+## Key identities
+
+These are the scaffolding of every EML tree:
+
+```
+ln(1)      = 0
+ln(e)      = 1
+exp(0)     = 1
+exp(1)     = e
+
+exp(ln x)  = x
+ln(exp x)  = x
+
+exp(a + b) = exp(a) · exp(b)
+ln(a · b)  = ln(a) + ln(b)
+```
+
+## How the identities become EML
+
+Each identity corresponds to a simplification rule in an EML tree.
+
+- `eml(x, 1) = exp(x) − 0 = exp(x)` uses `ln(1) = 0`.
+- `eml(1, 1) = e − 0 = e` uses `exp(1) = e` and `ln(1) = 0`.
+- The identity tree `eml(1, eml(eml(1, eml(x, 1)), 1))` reduces to `ln(exp(x)) = x`.
+
+Spend 15 minutes making sure the eight identities above feel trivial and the rest of the paper opens up.
