@@ -1,0 +1,29 @@
+# Binary tree (in EML)
+
+Every EML expression is, structurally, a **binary tree**.
+
+## The grammar
+
+The paper writes it as:
+
+```
+S → 1 | eml(S, S)
+```
+
+Read: an EML expression `S` is either the constant `1` (a leaf) or `eml` applied to two other EML expressions (an internal node with two children).
+
+## Three key metrics
+
+- **Depth** — the longest path from root to a leaf. Lower = simpler.
+- **Size** — the total number of nodes (internal + leaves).
+- **Leaf count** — how many `1`s appear. Since leaves are all identical, this tells you how much "raw material" you spent.
+
+## Why this shape matters
+
+A binary tree is one of the most-studied data structures in CS. That means:
+
+- Standard traversal algorithms (pre/in/post-order) apply directly.
+- Dynamic-programming techniques for tree optimization (minimize size for a target function) are in scope.
+- Hardware and compiler tooling for evaluating binary trees already exists.
+
+The [Function Gallery](/gallery) shows each function's tree shape. The [Playground](/playground) reports depth and size for any expression you build.
