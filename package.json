@@ -11,6 +11,10 @@
     "nextjs",
     "education"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prashantbsr/emlinteractive.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
