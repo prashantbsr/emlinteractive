@@ -25,3 +25,9 @@ export function evaluate(node: EMLNode, ctx: EvalContext = {}): number {
     }
   }
 }
+
+export function approxEqual(a: number, b: number, tol = 1e-10): boolean {
+  if (Number.isNaN(a) || Number.isNaN(b)) return false;
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return a === b;
+  return Math.abs(a - b) <= tol * Math.max(1, Math.abs(a), Math.abs(b));
+}
