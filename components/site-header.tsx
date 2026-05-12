@@ -6,9 +6,12 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/playground", label: "Playground" },
+type NavItem = { href: string; label: string };
+
+const navItems: NavItem[] = [
+  { href: "/",            label: "Home"       },
+  { href: "/paper",       label: "Paper"      },
+  { href: "/playground",  label: "Playground" },
 ];
 
 export function SiteHeader() {
