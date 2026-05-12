@@ -17,7 +17,7 @@ cos(x) = (exp(ix) + exp(−ix)) / 2
 sin(x) = (exp(ix) − exp(−ix)) / (2i)
 ```
 
-Both require `exp` of a complex number. Since EML nests `exp(x) − ln(y)`, and both `exp` and `ln` extend naturally to ℂ, the paper allows intermediate computations to pass through complex values — even when the final answer is real.
+Both require `exp` of a complex number. Since EML nests `exp(x) − ln(y)`, and both `exp` and `ln` extend naturally to ℂ, the paper allows intermediate computations to pass through complex values, even when the final answer is real.
 
 ## Why this is surprising
 
@@ -27,4 +27,4 @@ This is a feature, not a bug. It's what lets a single operator reach all the way
 
 ## What this means for implementation
 
-A practical EML engine must support complex arithmetic at evaluation time. For the V1 of this teaching app, we stay in ℝ — every tree in the [Function Gallery](/gallery) is chosen to avoid complex intermediates. For the trig functions, we point to the paper rather than showing the tree directly.
+A practical EML engine must support complex arithmetic at evaluation time. For the V1 of this teaching app, we stay in ℝ, every tree in the [Function Gallery](/gallery) is chosen to avoid complex intermediates. For the trig functions, we point to the paper rather than showing the tree directly.
