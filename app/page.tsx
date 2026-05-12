@@ -17,6 +17,7 @@ const PAPER_URL = "https://arxiv.org/html/2603.21852v2";
 
 export default function HomePage() {
   return (
+    <>
     <div className="container grid gap-10 py-10 pb-28 md:py-14 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:pb-14">
       {/* Sticky TOC sidebar */}
       <aside className="hidden lg:block">
@@ -437,5 +438,7 @@ multiply  : depth 8`}</code>
         </div>
       </article>
     </div>
+    <TocMobileBar entries={toc} />
+    </>
   );
 }
