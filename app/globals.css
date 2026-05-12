@@ -7,7 +7,27 @@
 
 @layer base {
   :root {
-    /* Light — muted paper terminal */
+    /* ── Blogterm — Plotter Theme ─────────────────────────────────────── */
+    /* Plotter palette — raw tokens (hex) */
+    --plotter-bg:        #ece6d4;  /* paper (warm cream)             */
+    --plotter-fg:        #1a1a1a;  /* graphite                       */
+    --plotter-dim:       #6a6258;  /* pencil — secondary text        */
+    --plotter-shadow:    #b8b0a0;  /* sunken edge                    */
+    --plotter-hilite:    #f8f4e8;  /* raised face                    */
+    --plotter-accent:    #2a3a8a;  /* indigo                         */
+    --plotter-accent-fg: #f8f4e8;  /* on-accent                      */
+    --plotter-link:      #2a3a8a;
+
+    /* aliases requested by the theme spec — raw hex, used directly */
+    --bg:        var(--plotter-bg);
+    --fg:        var(--plotter-fg);
+    --dim:       var(--plotter-dim);
+    --shadow:    var(--plotter-shadow);
+    --hilite:    var(--plotter-hilite);
+    --accent:    var(--plotter-accent);     /* indigo — used as a raw color */
+    --accent-fg: var(--plotter-accent-fg);
+    --link:      var(--plotter-link);
+
     --background: 40 12% 97%;
     --foreground: 220 20% 14%;
     --card: 40 10% 99%;
