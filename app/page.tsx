@@ -17,44 +17,11 @@ const PAPER_URL = "https://arxiv.org/html/2603.21852v2";
 
 export default function HomePage() {
   return (
-    <div className="container grid gap-10 py-10 md:py-14 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+    <div className="container grid gap-10 py-10 pb-28 md:py-14 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:pb-14">
       {/* Sticky TOC sidebar */}
       <aside className="hidden lg:block">
-        <div className="sticky top-20 space-y-6">
-          <div>
-            <div className="mb-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">
-              // paper
-            </div>
-            <a
-              href={PAPER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block border border-border bg-card p-3 font-mono text-xs leading-5 transition-colors hover:border-primary/50"
-            >
-              <div className="text-muted-foreground/70">arXiv:2603.21852v2</div>
-              <div className="mt-1 text-foreground">
-                All Elementary Functions from a Single Operator
-              </div>
-              <div className="mt-1 text-muted-foreground">
-                A. Odrzywołek, 2026
-              </div>
-              <div className="mt-2 flex items-center gap-1 text-primary group-hover:underline">
-                read paper
-                <ExternalLink className="h-3 w-3" />
-              </div>
-            </a>
-          </div>
+        <div className="sticky top-20">
           <Toc entries={toc} />
-          <div className="border border-border bg-card p-3 font-mono text-xs">
-            <div className="text-muted-foreground/70">// try it</div>
-            <Link
-              href="/playground"
-              className="mt-2 flex items-center justify-between text-primary hover:underline"
-            >
-              open playground
-              <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
         </div>
       </aside>
 
