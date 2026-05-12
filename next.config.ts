@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
   reactStrictMode: true,
   output: "export",
+  trailingSlash: true,
 };
 
 const withMDX = createMDX({
