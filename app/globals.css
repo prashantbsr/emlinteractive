@@ -28,6 +28,22 @@
     --accent-fg: var(--plotter-accent-fg);
     --link:      var(--plotter-link);
 
+    /* eight-pen drafting carousel */
+    --pen-01: #1a1a1a;  /* Graphite  — 0.5mm hard line              */
+    --pen-02: #2a3a8a;  /* Indigo    — primary rules & accent       */
+    --pen-03: #b8362a;  /* Vermilion — revisions / errata           */
+    --pen-04: #2f6a3a;  /* Pine      — annotations                  */
+    --pen-05: #6a4828;  /* Sepia     — secondary body               */
+    --pen-06: #b8862a;  /* Ochre     — highlights, breaks           */
+    --pen-07: #5a3a7a;  /* Violet    — footnotes & meta             */
+    --pen-08: #2a7a8a;  /* Cyan      — diagrams & figures           */
+
+    /* type system */
+    --font-mono: var(--font-plex-mono), "IBM Plex Mono", "Menlo",
+      "Consolas", "Courier New", monospace;
+    --fs: 14px;
+    --lh: 1.45;
+
     --background: 40 12% 97%;
     --foreground: 220 20% 14%;
     --card: 40 10% 99%;
