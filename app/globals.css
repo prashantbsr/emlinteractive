@@ -677,3 +677,16 @@
 .react-flow__background {
   background-color: var(--bg);
 }
+
+/* ── KaTeX — inherit graphite so equations sit on the page stock ────── */
+.katex {
+  color: var(--fg);
+}
+
+/* Block math gets horizontal overflow on narrow viewports so long
+   equations don't blow out the page width on mobile. */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
+}
