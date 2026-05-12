@@ -2,6 +2,8 @@ import type { EMLNode } from "./types";
 import { eml, one, variable } from "./types";
 
 const ONE = (): EMLNode => one();
+const X = (): EMLNode => variable("x");
+const Y = (): EMLNode => variable("y");
 
 // === Atomic constants and unary builders ===
 
@@ -91,3 +93,175 @@ export function buildSqrt(x: EMLNode): EMLNode {
   const halfK = buildMul(K_TREE, HALF);
   return buildExp(buildSub(halfShifted, halfK));
 }
+
+// === Operator templates with x, y variable slots ===
+// For unary ops, use variable "x". For binary, "x" and "y".
+
+export interface CalcOpSpec {
+  id: string;
+  label: string;
+  arity: 0 | 1 | 2;
+  tree: EMLNode;
+  // domain check on numeric inputs, returns null if OK, else error message
+  guard?: (env: Record<string, number>) => string | null;
+  // human-readable identity used by the UI
+  formula: string;
+}
+
+const positive = (key: string) => (env: Record<string, number>) =>
+  env[key] > 0 ? null : `${key} must be > 0`;
+
+const positives = (...keys: string[]) =>
+  (env: Record<string, number>) => {
+    for (const k of keys) {
+      if (!(env[k] > 0)) return `${k} must be > 0`;
+    }
+    return null;
+  };
+
+const inShiftRange = (...keys: string[]) =>
+  (env: Record<string, number>) => {
+    for (const k of keys) {
+      if (Math.abs(env[k]) >= K_VALUE) {
+        return `|${k}| must be < e^e ≈ 15.15 (shift constant K)`;
+      }
+    }
+    return null;
+  };
+
+export const CALC_OPS: Record<string, CalcOpSpec> = {
+  e: {
+    id: "e",
+    label: "e",
+    arity: 0,
+    tree: E_TREE,
+    formula: "eml(1, 1)",
+  },
+  zero: {
+    id: "zero",
+    label: "0",
+    arity: 0,
+    tree: ZERO_TREE,
+    formula: "eml(1, eml(eml(1, 1), 1))",
+  },
+  exp: {
+    id: "exp",
+    label: "exp(x)",
+    arity: 1,
+    tree: buildExp(X()),
+    formula: "eml(x, 1)",
+  },
+  ln: {
+    id: "ln",
+    label: "ln(x)",
+    arity: 1,
+    tree: buildLn(X()),
+    guard: positive("x"),
+    formula: "eml(1, eml(eml(1, x), 1))",
+  },
+  neg: {
+    id: "neg",
+    label: "-x",
+    arity: 1,
+    tree: buildNeg(X()),
+    guard: inShiftRange("x"),
+    formula: "(K - x) - K, with K = exp(e) = e^e ≈ 15.15",
+  },
+  recip: {
+    id: "recip",
+    label: "1/x",
+    arity: 1,
+    tree: buildRecip(X()),
+    guard: positive("x"),
+    formula: "exp(-ln(x))",
+  },
+  square: {
+    id: "square",
+    label: "x²",
+    arity: 1,
+    tree: buildSquare(X()),
+    guard: positive("x"),
+    formula: "exp(ln(x) + ln(x))",
+  },
+  cube: {
+    id: "cube",
+    label: "x³",
+    arity: 1,
+    tree: buildCube(X()),
+    guard: positive("x"),
+    formula: "exp(ln(x) + ln(x) + ln(x))",
+  },
+  sqrt: {
+    id: "sqrt",
+    label: "√x",
+    arity: 1,
+    tree: buildSqrt(X()),
+    guard: positive("x"),
+    formula: "exp((ln(x) + K)/2 - K/2)",
+  },
+  add: {
+    id: "add",
+    label: "x + y",
+    arity: 2,
+    tree: buildAdd(X(), Y()),
+    guard: (env) => {
+      if (Math.abs(env.x) >= K_VALUE) return `|x| must be < ${K_VALUE.toFixed(2)}`;
+      if (Math.abs(env.y) >= K_VALUE) return `|y| must be < ${K_VALUE.toFixed(2)}`;
+      if (Math.abs(env.x + env.y) >= K_VALUE) {
+        return `|x+y| must be < ${K_VALUE.toFixed(2)} (shift range)`;
+      }
+      return null;
+    },
+    formula: "((K - (-x)) - (-y)) - K",
+  },
+  sub: {
+    id: "sub",
+    label: "x - y",
+    arity: 2,
+    tree: buildSub(X(), Y()),
+    guard: positive("x"),
+    formula: "exp(ln(x)) - ln(exp(y))",
+  },
+  mul: {
+    id: "mul",
+    label: "x × y",
+    arity: 2,
+    tree: buildMul(X(), Y()),
+    guard: positives("x", "y"),
+    formula: "exp(ln(x) + ln(y))",
+  },
+  div: {
+    id: "div",
+    label: "x ÷ y",
+    arity: 2,
+    tree: buildDiv(X(), Y()),
+    guard: positives("x", "y"),
+    formula: "exp(ln(x) + ln(1/y))",
+  },
+};
+
+// Generalized binary ops that use shift tricks to handle negatives.
+// These wrap MUL/DIV with NEG to emulate sign handling at the EML-tree level
+// (i.e., still pure eml + 1, just composed differently per sign quadrant).
+// For simplicity in v1, the calculator UI computes signs in JS and dispatches
+// to the appropriate positive-domain tree above; the underlying tree shown to
+// the user is the canonical positive-domain construction.
+
+// Helper used by tests and the UI: list of all op ids in canonical order
+export const CALC_OP_IDS = [
+  "add",
+  "sub",
+  "mul",
+  "div",
+  "neg",
+  "recip",
+  "square",
+  "cube",
+  "sqrt",
+  "exp",
+  "ln",
+  "e",
+  "zero",
+] as const;
+
+export type CalcOpId = (typeof CALC_OP_IDS)[number];
