@@ -28,11 +28,14 @@ export default function PlaygroundPage() {
         <div className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
           ~/playground
         </div>
-        <h1 className="font-mono text-3xl font-semibold tracking-tight">
-          <span className="text-primary">&gt;</span> eml repl
+        <h1 className="font-mono text-3xl font-semibold tracking-tight text-primary">
+          eml playground
         </h1>
         <p className="text-sm text-muted-foreground">
-          Build EML expressions one node at a time. The tree and its value update as you type.
+          A scientific calculator whose every operation is a pure EML tree, plus
+          a REPL for hand-rolled expressions. Switch with the tabs below, each
+          answer comes with the underlying <code>eml(x, y)</code> expansion you
+          can inspect.
         </p>
       </div>
       <PlaygroundClient />
