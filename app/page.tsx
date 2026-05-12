@@ -45,6 +45,29 @@ export default function HomePage() {
           </p>
         </header>
 
+        <p>
+          i was just curious when i came across this paper, after all, its
+          something like NAND for the mathematics.
+        </p>
+        <p>
+          out of curiosity i researched more about it and ended few shotting
+          a basic webapp describing a few ideas explored by LLM itself and
+          a playground.
+        </p>
+        <p>
+          i had this intuition that maybe a new ISA and chip design can be
+          developed using this. but it also has problems of its own. also
+          got to know about potential of this paper in tracing during LLM
+          development for some things, but its also like walking through
+          the quicksand. maybe in near future some missing piece will be
+          added to this paper, and a whole new possibilities and innovation
+          will arise. but its all a big maybe. because here we are not
+          talking about some patch in a software. we are talking about the
+          very foundations of most complex tech pieces ever built. even if
+          we get to build something efficient, it will be long long time
+          till it gets accepted somewhere.
+        </p>
+
         {/* 1. Overview */}
         <h2 id="overview">Overview</h2>
         <p>
