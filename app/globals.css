@@ -72,26 +72,44 @@
   }
 
   .dark {
-    /* Dark — terminal */
-    --background: 220 18% 7%;
-    --foreground: 140 15% 88%;
-    --card: 220 18% 9%;
-    --card-foreground: 140 15% 88%;
-    --popover: 220 18% 9%;
-    --popover-foreground: 140 15% 88%;
-    --primary: 150 70% 55%;
-    --primary-foreground: 220 18% 7%;
-    --secondary: 220 15% 13%;
-    --secondary-foreground: 140 15% 88%;
-    --muted: 220 15% 12%;
-    --muted-foreground: 220 10% 55%;
-    --accent: 150 40% 18%;
-    --accent-foreground: 150 70% 75%;
-    --destructive: 0 60% 50%;
-    --destructive-foreground: 140 15% 88%;
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
-    --ring: 150 70% 55%;
+    /* Dark plotter — graphite paper, cream pen */
+    --plotter-bg:        #1a1a1a;
+    --plotter-fg:        #ece6d4;
+    --plotter-dim:       #a8a090;
+    --plotter-shadow:    #000000;
+    --plotter-hilite:    #2a2a2a;
+    --plotter-accent:    #8a96d8;
+    --plotter-accent-fg: #1a1a1a;
+    --plotter-link:      #8a96d8;
+
+    --bg:        var(--plotter-bg);
+    --fg:        var(--plotter-fg);
+    --dim:       var(--plotter-dim);
+    --shadow:    var(--plotter-shadow);
+    --hilite:    var(--plotter-hilite);
+    --accent:    var(--plotter-accent);
+    --accent-fg: var(--plotter-accent-fg);
+    --link:      var(--plotter-link);
+
+    --background:            0  0% 10%;
+    --foreground:           45 39% 88%;
+    --card:                  0  0% 16%;
+    --card-foreground:      45 39% 88%;
+    --popover:               0  0% 16%;
+    --popover-foreground:   45 39% 88%;
+    --primary:             230 50% 70%;
+    --primary-foreground:    0  0% 10%;
+    --secondary:             0  0% 18%;
+    --secondary-foreground: 45 39% 88%;
+    --muted:                 0  0% 18%;
+    --muted-foreground:     34 12% 62%;
+    --ui-accent:             0  0% 16%;
+    --accent-foreground:   230 50% 70%;
+    --destructive:           5 60% 55%;
+    --destructive-foreground: 0 0% 10%;
+    --border:                0  0% 25%;
+    --input:                 0  0% 25%;
+    --ring:                230 50% 70%;
   }
 
   * {
