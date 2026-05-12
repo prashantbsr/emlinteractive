@@ -57,12 +57,12 @@ export const library: EMLFunctionSpec[] = [
     sampleInputs: { x: 1 },
     category: "transcendental",
     description:
-      "The exponential function — the simplest function to build in EML. A single node does it.",
+      "The exponential function, the simplest function to build in EML. A single node does it.",
     derivation: [
       "Start from the definition: eml(x, y) = exp(x) − ln(y).",
       "Plug in y = 1: eml(x, 1) = exp(x) − ln(1).",
       "Since ln(1) = 0: eml(x, 1) = exp(x).",
-      "Depth 1 — this is the shallowest non-trivial EML tree.",
+      "Depth 1, this is the shallowest non-trivial EML tree.",
     ],
   },
   {
@@ -102,7 +102,7 @@ export const library: EMLFunctionSpec[] = [
     sampleInputs: {},
     category: "constant",
     description:
-      "Zero isn't a primitive in EML — it takes depth 3 to build. This is surprising and fundamental to how EML reshapes what 'simple' means.",
+      "Zero isn't a primitive in EML, it takes depth 3 to build. This is surprising and fundamental to how EML reshapes what 'simple' means.",
     derivation: [
       "Goal: produce 0.",
       "Inner: eml(1, 1) = e.",
@@ -125,7 +125,7 @@ export const library: EMLFunctionSpec[] = [
     sampleInputs: { x: Math.E },
     category: "transcendental",
     description:
-      "The natural log reassembles itself in three nested EML calls — a clean contrast to exp's single-node form.",
+      "The natural log reassembles itself in three nested EML calls, a clean contrast to exp's single-node form.",
     derivation: [
       "Let a = eml(1, x) = e − ln(x).",
       "Let b = eml(a, 1) = exp(a) − 0 = exp(e − ln(x)).",
