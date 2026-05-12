@@ -68,3 +68,26 @@ export function buildRecip(x: EMLNode): EMLNode {
 export function buildDiv(a: EMLNode, b: EMLNode): EMLNode {
   return buildMul(a, buildRecip(b));
 }
+
+// SQUARE(x) = x * x for x > 0
+export function buildSquare(x: EMLNode): EMLNode {
+  return buildMul(x, x);
+}
+
+// CUBE(x) = x * x * x for x > 0
+export function buildCube(x: EMLNode): EMLNode {
+  return buildMul(x, buildMul(x, x));
+}
+
+// SQRT(x) for x > 0, using shift trick on ln(x) so it works for any x > 0:
+//   sqrt(x) = exp( ln(x) / 2 )
+//          = exp( (ln(x) + K)/2 - K/2 )
+// (ln(x) + K) > 0 for any x > exp(-K) ≈ 0, and K/2 > 0, so MULs and SUBs stay valid.
+export function buildSqrt(x: EMLNode): EMLNode {
+  const TWO = buildAdd(ONE(), ONE());
+  const HALF = buildRecip(TWO);
+  const lnxPlusK = buildAdd(buildLn(x), K_TREE);
+  const halfShifted = buildMul(lnxPlusK, HALF);
+  const halfK = buildMul(K_TREE, HALF);
+  return buildExp(buildSub(halfShifted, halfK));
+}
