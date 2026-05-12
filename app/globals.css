@@ -273,6 +273,18 @@
     font-weight: 700;
   }
 
+  /* Inline code — hilite chip with shadow border */
+  .prose-nerd :not(pre) > code,
+  .prose-kb :not(pre) > code,
+  code.inline {
+    background: var(--hilite);
+    border: 1px solid var(--shadow);
+    padding: 0 4px;
+    border-radius: 2px;
+    font-size: 0.875em;
+    color: var(--fg);
+  }
+
   .gradient-text {
     @apply text-primary;
   }
