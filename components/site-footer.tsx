@@ -1,22 +1,27 @@
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-background">
-      <div className="container flex flex-col gap-2 py-6 font-mono text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
+    <footer
+      className="raised mt-2 font-mono text-xs"
+      style={{ background: "var(--bg)", color: "var(--fg)" }}
+    >
+      <div
+        className="flex flex-col gap-1 px-3 py-2 md:flex-row md:items-center md:justify-between"
+        style={{ color: "var(--dim)" }}
+      >
         <p>
-          <span className="text-muted-foreground/70">//</span> based on{" "}
+          based on{" "}
           <a
             href="https://arxiv.org/html/2603.21852v2"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground underline decoration-dotted underline-offset-4 hover:text-primary"
+            className="underline decoration-1 underline-offset-2 hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:no-underline"
+            style={{ color: "var(--link)" }}
           >
             All Elementary Functions from a Single Operator
-          </a>{" "}
-          — A. Odrzywołek (2026)
+          </a>
+          , A. Odrzywołek (2026)
         </p>
-        <p className="text-muted-foreground/80">
-          exp(x) − ln(y) is all you need
-        </p>
+        <p>exp(x) − ln(y) is all you need</p>
       </div>
     </footer>
   );
