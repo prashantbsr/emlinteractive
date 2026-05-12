@@ -8,6 +8,7 @@ const toc: TocEntry[] = [
   { id: "nand-analogy", label: "The NAND analogy", level: 2 },
   { id: "worked-examples", label: "Worked examples", level: 2 },
   { id: "use-cases", label: "Use cases", level: 2 },
+  { id: "isa-question", label: "Could we build a chip on it?", level: 2 },
   { id: "potential", label: "Potential & open problems", level: 2 },
 ];
 
