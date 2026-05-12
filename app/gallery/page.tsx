@@ -97,7 +97,7 @@ export default function GalleryPage() {
                 </p>
               </div>
               <Badge variant="outline" className="shrink-0">
-                depth {p.depth}
+                K = {p.codeLength}
               </Badge>
             </li>
           ))}
