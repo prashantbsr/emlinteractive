@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { Toc, type TocEntry } from "@/components/landing/toc";
+import { Toc, TocMobileBar, type TocEntry } from "@/components/landing/toc";
+import { ContactCard } from "@/components/landing/contact-card";
 
 const toc: TocEntry[] = [
   { id: "overview", label: "Overview", level: 2 },
