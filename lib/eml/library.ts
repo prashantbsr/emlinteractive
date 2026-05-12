@@ -175,36 +175,37 @@ export const referenceCodeLengths: Record<string, number> = {
 };
 
 // Functions from Table 4 that v1 does not yet ship verified concrete trees for.
-export const pendingFunctions: { name: string; depth: number; note: string }[] = [
+// `codeLength` is K = 2·leaves − 1 from the paper's "Direct" column.
+export const pendingFunctions: { name: string; codeLength: number; note: string }[] = [
   {
     name: "negate",
-    depth: 2,
-    note: "Depth-2 construction via subtractive identities — verified tree pending v2.",
+    codeLength: 15,
+    note: "Paper Table 4 K = 15 (8 leaves), verified tree pending v2.",
   },
   {
     name: "reciprocal",
-    depth: 2,
-    note: "Builds on negate(ln(x)) composed with exp — verified tree pending v2.",
+    codeLength: 15,
+    note: "Paper Table 4 K = 15, exp(−ln(x)) composed via shifted SUB; pending v2.",
   },
   {
     name: "subtract",
-    depth: 4,
-    note: "Requires negate as a sub-tree — pending v2.",
+    codeLength: 11,
+    note: "Paper Table 4 K = 11 (6 leaves), pending v2.",
   },
   {
     name: "add",
-    depth: 5,
-    note: "Builds on subtract — pending v2.",
+    codeLength: 19,
+    note: "Paper Table 4 K = 19 (10 leaves), builds on subtract; pending v2.",
   },
   {
     name: "divide",
-    depth: 7,
-    note: "Builds on reciprocal and multiply — pending v2.",
+    codeLength: 17,
+    note: "Paper Table 4 K = 17, multiply ∘ reciprocal; pending v2.",
   },
   {
     name: "multiply",
-    depth: 8,
-    note: "Deepest of the basics — pending v2.",
+    codeLength: 17,
+    note: "Paper Table 4 K = 17. Paper §3 also notes the displayed tree reaches depth 8.",
   },
 ];
 
