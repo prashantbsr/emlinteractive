@@ -18,7 +18,7 @@ interface Props {
 export function FunctionDetailClient({ fn }: Props) {
   const [x, setX] = useState<number>(fn.sampleInputs.x ?? 1);
   const hasX = fn.variables.includes("x");
-  const env = hasX ? { x } : undefined;
+  const env = useMemo(() => (hasX ? { x } : undefined), [hasX, x]);
 
   const result = useMemo(() => {
     try {
