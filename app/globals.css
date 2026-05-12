@@ -339,6 +339,89 @@
     margin: 0.25rem 0;
   }
 
+  /* Tables — dosgrid */
+  .prose-nerd table,
+  .prose-kb table,
+  table.dosgrid {
+    width: 100%;
+    margin: 1.25rem 0;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .prose-nerd table th,
+  .prose-kb table th,
+  table.dosgrid th {
+    background: var(--accent);
+    color: var(--accent-fg);
+    border: 1px solid var(--fg);
+    padding: 6px 10px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .prose-nerd table td,
+  .prose-kb table td,
+  table.dosgrid td {
+    border: 1px solid var(--fg);
+    padding: 6px 10px;
+  }
+  .prose-nerd table tr:nth-child(even) td,
+  .prose-kb table tr:nth-child(even) td,
+  table.dosgrid tr:nth-child(even) td {
+    background: color-mix(in srgb, #000 4%, transparent);
+  }
+
+  /* Keyboard chip */
+  .kbd {
+    background: var(--hilite);
+    border: 1px solid var(--fg);
+    box-shadow: 1px 1px 0 var(--fg);
+    padding: 0 5px;
+    font-weight: 600;
+    font-size: 0.85em;
+    color: var(--fg);
+    border-radius: 2px;
+  }
+
+  /* F-key footer chip */
+  .fkey {
+    background: var(--fg);
+    color: var(--bg);
+    padding: 0 4px;
+    font-weight: 700;
+    font-size: 0.8em;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+  }
+
+  /* Figure card — bordered with hard offset shadow */
+  .figure-card {
+    border: 1px solid var(--fg);
+    box-shadow: 2px 2px 0 var(--shadow);
+    background: var(--bg);
+    margin: 1.5rem 0;
+  }
+  .figure-cap {
+    background: var(--fg);
+    color: var(--bg);
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* Cursor blink (the single permitted animation) */
+  .cursor {
+    display: inline-block;
+    width: 0.6ch;
+    height: 1em;
+    background: currentColor;
+    vertical-align: -0.15em;
+    animation: cursor-blink 1s steps(2) infinite;
+  }
+  @keyframes cursor-blink {
+    50% { opacity: 0; }
+  }
+
   .gradient-text {
     @apply text-primary;
   }
