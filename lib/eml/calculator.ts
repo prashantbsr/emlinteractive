@@ -50,3 +50,21 @@ export function buildAdd(a: EMLNode, b: EMLNode): EMLNode {
     K_TREE
   );
 }
+
+// MUL(a, b) = a * b for a > 0, b > 0
+//   = exp(ln(a) + ln(b))
+export function buildMul(a: EMLNode, b: EMLNode): EMLNode {
+  return buildExp(buildAdd(buildLn(a), buildLn(b)));
+}
+
+// RECIP(x) = 1/x for x > 0
+//   = exp(-ln(x))
+export function buildRecip(x: EMLNode): EMLNode {
+  return buildExp(buildNeg(buildLn(x)));
+}
+
+// DIV(a, b) = a / b for a > 0, b > 0
+//   = a * (1/b)
+export function buildDiv(a: EMLNode, b: EMLNode): EMLNode {
+  return buildMul(a, buildRecip(b));
+}
