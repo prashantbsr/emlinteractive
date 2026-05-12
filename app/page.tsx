@@ -68,6 +68,29 @@ export default function HomePage() {
           till it gets accepted somewhere.
         </p>
 
+        {/* Paper + playground buttons */}
+        <div className="not-prose my-10 flex flex-wrap gap-3">
+          <a
+            href={PAPER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 border border-foreground bg-background px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.18em] text-foreground shadow-[2px_2px_0_var(--shadow)] transition-transform hover:-translate-x-px hover:-translate-y-px hover:shadow-[3px_3px_0_var(--shadow)] active:translate-x-0 active:translate-y-0 active:shadow-[1px_1px_0_var(--shadow)]"
+          >
+            read paper
+            <ExternalLink className="h-3 w-3" />
+          </a>
+          <Link
+            href="/playground"
+            className="inline-flex items-center gap-2 border border-foreground px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.18em] shadow-[2px_2px_0_var(--shadow)] transition-transform hover:-translate-x-px hover:-translate-y-px hover:shadow-[3px_3px_0_var(--shadow)] active:translate-x-0 active:translate-y-0 active:shadow-[1px_1px_0_var(--shadow)]"
+            style={{ background: "var(--accent)", color: "var(--accent-fg)" }}
+          >
+            try it
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+
+        <ContactCard />
+
         {/* 1. Overview */}
         <h2 id="overview">Overview</h2>
         <p>
