@@ -34,3 +34,19 @@ export function buildLn(arg: EMLNode): EMLNode {
 export function buildSub(a: EMLNode, b: EMLNode): EMLNode {
   return eml(buildLn(a), buildExp(b));
 }
+
+// NEG(x) = -x via shift trick: (K - x) - K.
+// Domain: x < K (~3.8M); both nested SUBs have positive first arg.
+export function buildNeg(x: EMLNode): EMLNode {
+  return buildSub(buildSub(K_TREE, x), K_TREE);
+}
+
+// ADD(a, b) = a + b via shift trick:
+//   ((K - NEG(a)) - NEG(b)) - K  =  (K + a + b) - K  =  a + b.
+// Each intermediate is positive when |a|, |b|, |a+b| < K.
+export function buildAdd(a: EMLNode, b: EMLNode): EMLNode {
+  return buildSub(
+    buildSub(buildSub(K_TREE, buildNeg(a)), buildNeg(b)),
+    K_TREE
+  );
+}
