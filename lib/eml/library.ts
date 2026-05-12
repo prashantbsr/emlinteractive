@@ -156,17 +156,22 @@ export const library: EMLFunctionSpec[] = [
   },
 ];
 
-// Table 4 reference values from the paper — exact depths for the symbolic record.
-export const referenceDepths: Record<string, number> = {
-  exp: 1,
-  e: 1,
-  negate: 2,
-  reciprocal: 2,
-  ln: 3,
-  subtract: 4,
-  add: 5,
-  divide: 7,
-  multiply: 8,
+// Table 4 reference values from the paper. The published metric is K, the
+// RPN code length of the shortest expression found by direct exhaustive search,
+// where K = 2·leaves − 1. The paper does not publish a per-function tree-depth
+// column; depth is only mentioned in §3 as a 1–8 range across all functions.
+export const referenceCodeLengths: Record<string, number> = {
+  exp: 3, // e^x
+  e: 3,
+  ln: 7, // ln x
+  identity: 9, // x
+  zero: 7, // 0
+  negate: 15, // −x
+  reciprocal: 15, // 1/x
+  subtract: 11, // x − y
+  add: 19, // x + y
+  multiply: 17, // x × y
+  divide: 17, // x / y
 };
 
 // Functions from Table 4 that v1 does not yet ship verified concrete trees for.
