@@ -420,6 +420,50 @@ multiply  : depth 8`}</code>
           was trying to replace.
         </p>
 
+        <h3 id="isa-q2">
+          2. Does that change if we redesign the chip <em>and</em> the ISA?
+        </h3>
+        <p>
+          Still no, and there's a 50-year research tradition that tells us
+          why. What you'd be building is a flavor of{" "}
+          <strong>One Instruction Set Computer</strong> (OISC), a CPU with
+          a single primitive instruction. Real examples exist:{" "}
+          <a href="https://en.wikipedia.org/wiki/One-instruction_set_computer">
+            SUBLEQ
+          </a>{" "}
+          ("subtract and branch if less-equal"), Transport-Triggered
+          Architectures, Logarithmic Number System chips. All Turing
+          complete. All <strong>10×–1000× slower</strong> than conventional
+          CPUs on real workloads. EML-on-silicon would inherit the same
+          fate.
+        </p>
+        <p>
+          The argument "but if we co-design the whole stack" assumes the
+          bottleneck is impedance mismatch between ISA and hardware. It
+          isn't. The bottleneck is the <em>physics of the primitive</em>:
+        </p>
+        <ul>
+          <li>
+            <code>add</code> needs a carry-propagate network. ~log(n) gate
+            delays. No known faster way.
+          </li>
+          <li>
+            <code>exp</code> / <code>ln</code> need range reduction +
+            polynomial / LUT evaluation. <em>Mathematically irreducible</em>:
+            {" "}no chip redesign changes the fact that a 53-bit{" "}
+            <code>exp</code> requires more work than a 53-bit add.
+          </li>
+        </ul>
+        <p>
+          No silicon arrangement gets you below{" "}
+          <code>(exp_cost + ln_cost + sub_cost) &gt; add_cost</code>. That's
+          a fundamental lower bound, not an engineering limitation. The
+          gains from co-design, simpler decoder, no structural hazards,
+          smaller compiler backend, are real but maybe ~10–20% of total
+          chip cost. You can't co-design your way out of a two-orders-of-
+          magnitude hole with 20% gains.
+        </p>
+
         {/* 7. Potential */}
         <h2 id="potential">Potential &amp; open problems</h2>
         <p>
