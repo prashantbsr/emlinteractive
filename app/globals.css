@@ -308,6 +308,36 @@
     color: inherit;
     font-size: inherit;
   }
+  /* Token colours inside inverted code */
+  .prose-nerd pre .token.keyword,
+  .prose-kb pre .token.keyword,
+  pre.code-block .token.keyword { color: #ffd866; }
+  .prose-nerd pre .token.string,
+  .prose-kb pre .token.string,
+  pre.code-block .token.string { color: #a9dc76; }
+  .prose-nerd pre .token.comment,
+  .prose-kb pre .token.comment,
+  pre.code-block .token.comment { color: #8a8a8a; font-style: italic; }
+  .prose-nerd pre .token.number,
+  .prose-kb pre .token.number,
+  pre.code-block .token.number { color: #ff6188; }
+  .prose-nerd pre .token.prompt,
+  .prose-kb pre .token.prompt,
+  pre.code-block .token.prompt { color: #78dce8; }
+
+  /* Blockquote — indigo double rule + 8% wash */
+  .prose-nerd blockquote,
+  .prose-kb blockquote {
+    margin: 1.25rem 0;
+    border-left: 3px double var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    padding: 0.5rem 1rem;
+    color: var(--fg);
+  }
+  .prose-nerd blockquote p,
+  .prose-kb blockquote p {
+    margin: 0.25rem 0;
+  }
 
   .gradient-text {
     @apply text-primary;
