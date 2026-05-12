@@ -9,7 +9,7 @@ export interface TocEntry {
   level?: 2 | 3;
 }
 
-export function Toc({ entries }: { entries: TocEntry[] }) {
+function useActiveSection(entries: TocEntry[]) {
   const [active, setActive] = useState<string | null>(entries[0]?.id ?? null);
 
   useEffect(() => {
@@ -32,10 +32,16 @@ export function Toc({ entries }: { entries: TocEntry[] }) {
     return () => observer.disconnect();
   }, [entries]);
 
+  return active;
+}
+
+export function Toc({ entries }: { entries: TocEntry[] }) {
+  const active = useActiveSection(entries);
+
   return (
     <nav aria-label="Table of contents" className="text-sm">
       <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">
-        // contents
+        contents
       </div>
       <ol className="space-y-1 border-l border-border">
         {entries.map((entry, i) => {
