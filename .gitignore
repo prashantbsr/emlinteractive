@@ -48,5 +48,12 @@ CLAUDE.local.md
 # Project archive (private research, specs, dev notes)
 .archive/
 
+# Private LLM-maintained knowledge wiki + meta-doc (kept local, not part of the public repo)
+wiki/
+llm-wiki.md
+
+# Local build/test capture artifacts
+build-output.txt
+
 # Vercel
 .vercel
