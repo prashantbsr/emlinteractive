@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://emlinteractive.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://prashantbsr.github.io/emlinteractive";
 const title = "EMLinteractive — One operator, all of math";
 const description =
   "Interactive learning playground for the EML operator: how a single binary operation can generate every elementary mathematical function.";
