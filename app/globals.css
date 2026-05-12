@@ -233,6 +233,46 @@
     text-decoration: none;
   }
 
+  .prose-nerd ul,
+  .prose-kb ul {
+    @apply my-4 pl-0 space-y-1;
+    list-style: none;
+  }
+  .prose-nerd ul > li,
+  .prose-kb ul > li {
+    position: relative;
+    padding-left: 2ch;
+  }
+  .prose-nerd ul > li::before,
+  .prose-kb ul > li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .prose-nerd ol,
+  .prose-kb ol {
+    @apply my-4 pl-0 space-y-1;
+    list-style: none;
+    counter-reset: dos;
+  }
+  .prose-nerd ol > li,
+  .prose-kb ol > li {
+    position: relative;
+    padding-left: 4ch;
+    counter-increment: dos;
+  }
+  .prose-nerd ol > li::before,
+  .prose-kb ol > li::before {
+    content: "[" counter(dos, decimal-leading-zero) "]";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
   .gradient-text {
     @apply text-primary;
   }
