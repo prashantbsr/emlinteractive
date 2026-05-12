@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://emlinteractive.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://prashantbsr.github.io/emlinteractive";
 
 export default function robots(): MetadataRoute.Robots {
   return {
