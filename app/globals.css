@@ -159,6 +159,15 @@
       inset -1px -1px 0 var(--shadow);
   }
 
+  .inset {
+    border: 1px solid var(--shadow);
+    border-right-color: var(--hilite);
+    border-bottom-color: var(--hilite);
+    box-shadow:
+      inset 1px 1px 0 var(--shadow),
+      inset -1px -1px 0 var(--hilite);
+  }
+
   /* Article typography for blog-style pages */
   .prose-nerd {
     @apply text-foreground leading-7;
