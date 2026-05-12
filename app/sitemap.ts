@@ -3,7 +3,7 @@ import { library } from "@/lib/eml/library";
 import { articles } from "@/lib/kb/articles";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://emlinteractive.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://prashantbsr.github.io/emlinteractive";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
