@@ -128,7 +128,7 @@ export const articles: Article[] = [
     title: "exp and ln: the two halves of eml",
     category: "math",
     summary:
-      "Refresher on exp and ln — their key identities power every derivation in this paper.",
+      "Refresher on exp and ln, their key identities power every derivation in this paper.",
     tags: ["exp", "ln", "background"],
     searchText: "exp ln exponential logarithm identity natural base e",
   },
