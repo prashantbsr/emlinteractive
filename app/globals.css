@@ -122,19 +122,10 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "ss01" 1, "ss02" 1, "cv11" 1;
-    font-family:
-      ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas,
-      "Liberation Mono", monospace;
-  }
-
-  /* Faint grid background for that blueprint/terminal vibe */
-  body {
-    background-image:
-      linear-gradient(to right, hsl(var(--border) / 0.35) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border) / 0.35) 1px, transparent 1px);
-    background-size: 48px 48px;
-    background-position: -1px -1px;
+    font-family: var(--font-mono);
+    font-size: var(--fs);
+    line-height: var(--lh);
+    font-feature-settings: "ss01" 0, "zero" 1;
   }
 
   code,
