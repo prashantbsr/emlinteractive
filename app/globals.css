@@ -149,6 +149,16 @@
 }
 
 @layer components {
+  /* ── Sunken / Raised chrome — the structural grammar ──────────────── */
+  .raised {
+    border: 1px solid var(--hilite);
+    border-right-color: var(--shadow);
+    border-bottom-color: var(--shadow);
+    box-shadow:
+      inset 1px 1px 0 var(--hilite),
+      inset -1px -1px 0 var(--shadow);
+  }
+
   /* Article typography for blog-style pages */
   .prose-nerd {
     @apply text-foreground leading-7;
