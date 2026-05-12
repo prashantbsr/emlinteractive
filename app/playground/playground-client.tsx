@@ -1,16 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Eraser, Plus, Sparkles } from "lucide-react";
+import { Calculator as CalcIcon, Eraser, Plus, Sparkles, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { TreeView } from "@/components/eml/tree-view";
+import { CalculatorPad } from "@/components/eml/calculator-pad";
 import { parse, EMLParseError } from "@/lib/eml/parser";
 import { evaluate, EMLEvalError } from "@/lib/eml/evaluate";
 import { treeDepth, treeSize, leafCount } from "@/lib/eml/depth";
-import { formatNumber } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 
 interface Example {
   label: string;
@@ -35,7 +36,43 @@ const EXAMPLES: Example[] = [
   },
 ];
 
+type Mode = "calculator" | "repl";
+
 export function PlaygroundClient() {
+  const [mode, setMode] = useState<Mode>("calculator");
+
+  return (
+    <div className="space-y-6">
+      <div className="inline-flex rounded-md border border-border bg-card p-1 font-mono text-xs">
+        <button
+          onClick={() => setMode("calculator")}
+          className={cn(
+            "flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors",
+            mode === "calculator"
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          <CalcIcon className="h-3.5 w-3.5" /> calculator
+        </button>
+        <button
+          onClick={() => setMode("repl")}
+          className={cn(
+            "flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors",
+            mode === "repl"
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          <Terminal className="h-3.5 w-3.5" /> repl
+        </button>
+      </div>
+      {mode === "calculator" ? <CalculatorPad /> : <ReplClient />}
+    </div>
+  );
+}
+
+function ReplClient() {
   const [expr, setExpr] = useState("eml(1, 1)");
   const [xValue, setXValue] = useState(1);
 
