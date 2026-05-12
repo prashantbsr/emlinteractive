@@ -581,6 +581,48 @@
     color: var(--dim);
     background: var(--hilite);
   }
+
+  /* ── Plotter Button primitives ────────────────────────────────────── */
+  .plotter-btn {
+    border: 1px solid var(--hilite);
+    border-right-color: var(--shadow);
+    border-bottom-color: var(--shadow);
+    box-shadow:
+      inset 1px 1px 0 var(--hilite),
+      inset -1px -1px 0 var(--shadow);
+    cursor: pointer;
+  }
+  .plotter-btn:active:not(:disabled),
+  .plotter-btn[data-state="on"],
+  .plotter-btn[aria-pressed="true"] {
+    border-color: var(--shadow);
+    border-right-color: var(--hilite);
+    border-bottom-color: var(--hilite);
+    box-shadow:
+      inset 1px 1px 0 var(--shadow),
+      inset -1px -1px 0 var(--hilite);
+  }
+  .plotter-btn--accent {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  .plotter-btn--accent:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--accent) 88%, #fff);
+  }
+  .plotter-btn--paper {
+    background: var(--bg);
+    color: var(--fg);
+  }
+  .plotter-btn--paper:hover:not(:disabled) {
+    background: var(--hilite);
+  }
+  .plotter-btn--destructive {
+    background: var(--pen-03);
+    color: var(--accent-fg);
+  }
+  .plotter-btn--destructive:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--pen-03) 88%, #fff);
+  }
 }
 
 .react-flow__node {
