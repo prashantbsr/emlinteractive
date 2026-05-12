@@ -10,7 +10,7 @@ Symbolic regression fits the *form* itself: "what function `f` best fits these (
 
 ## How EML helps
 
-The paper proposes using EML trees as the search space. Every candidate formula is a binary tree of `eml` calls — a simple combinatorial object that you can:
+The paper proposes using EML trees as the search space. Every candidate formula is a binary tree of `eml` calls, a simple combinatorial object that you can:
 
 1. Enumerate (shallow trees first)
 2. Mutate (swap subtrees, introduce variables)
@@ -24,4 +24,4 @@ The paper proposes using EML trees as the search space. Every candidate formula 
 
 ## Why a fixed basis helps
 
-Most symbolic-regression engines (like PySR or AI Feynman) use a handful of primitives per tree node, which explodes the search space. EML has *one* primitive — so the branching factor at each node is much smaller, making the search tractable even though trees must be deeper.
+Most symbolic-regression engines (like PySR or AI Feynman) use a handful of primitives per tree node, which explodes the search space. EML has *one* primitive, so the branching factor at each node is much smaller, making the search tractable even though trees must be deeper.
