@@ -4,6 +4,7 @@
   "private": true,
   "description": "Interactive learning playground for the EML operator from Odrzywolek's paper on elementary-function completeness.",
   "license": "MIT",
+  "author": "EMLinteractive contributors",
   "keywords": [
     "eml",
     "elementary-functions",
