@@ -130,13 +130,21 @@
 
   code,
   pre,
-  kbd {
-    font-family:
-      ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  kbd,
+  samp {
+    font-family: var(--font-mono);
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.35);
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Drafting-style horizontal rule */
+  hr {
+    border: 0;
+    border-top: 1px dashed hsl(var(--border));
+    margin: 1.5rem 0;
   }
 }
 
