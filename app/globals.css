@@ -623,6 +623,44 @@
   .plotter-btn--destructive:hover:not(:disabled) {
     background: color-mix(in srgb, var(--pen-03) 88%, #fff);
   }
+
+  /* ── Plotter Input — sunken paper field ───────────────────────────── */
+  .plotter-input {
+    background: var(--hilite);
+    color: var(--fg);
+    border: 1px solid var(--shadow);
+    border-right-color: var(--hilite);
+    border-bottom-color: var(--hilite);
+    box-shadow:
+      inset 1px 1px 0 var(--shadow),
+      inset -1px -1px 0 var(--hilite);
+    border-radius: 2px;
+  }
+  .plotter-input:focus,
+  .plotter-input:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 0;
+  }
+
+  /* ── Plotter Badge — square uppercase chip ────────────────────────── */
+  .plotter-badge {
+    border: 1px solid var(--fg);
+    line-height: 1.4;
+  }
+  .plotter-badge--accent {
+    background: var(--accent);
+    color: var(--accent-fg);
+    border-color: var(--accent);
+  }
+  .plotter-badge--paper {
+    background: var(--bg);
+    color: var(--fg);
+  }
+  .plotter-badge--muted {
+    background: var(--hilite);
+    color: var(--dim);
+    border-color: var(--shadow);
+  }
 }
 
 .react-flow__node {
