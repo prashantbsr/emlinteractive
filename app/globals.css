@@ -562,6 +562,25 @@
   @keyframes cc-blink {
     50% { opacity: 0; }
   }
+
+  /* ── Plotter Card primitive (drafting card) ───────────────────────── */
+  .plotter-card {
+    background: var(--bg);
+    border: 1px solid var(--fg);
+    box-shadow: 2px 2px 0 var(--shadow);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .plotter-card-header {
+    background: var(--hilite);
+    border-bottom: 1px dashed var(--shadow);
+    color: var(--fg);
+  }
+  .plotter-card-footer {
+    border-top: 1px dashed var(--shadow);
+    color: var(--dim);
+    background: var(--hilite);
+  }
 }
 
 .react-flow__node {
