@@ -422,18 +422,30 @@
     50% { opacity: 0; }
   }
 
+  /* Gradient-text alias — collapse to flat indigo */
   .gradient-text {
-    @apply text-primary;
+    color: var(--accent);
+    background: none !important;
+    -webkit-text-fill-color: currentColor;
   }
 
+  /* EML tree node — drafting card */
   .eml-node {
-    @apply rounded-sm border border-border bg-card px-3 py-2 shadow-none font-mono text-sm;
+    background: var(--hilite);
+    border: 1px solid var(--fg);
+    box-shadow: 1px 1px 0 var(--shadow);
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    border-radius: 2px;
+    color: var(--fg);
   }
 
-  /* Prompt-style marker used around the site */
+  /* Prompt marker (legacy) — indigo $ */
   .prompt::before {
     content: "$ ";
-    @apply text-primary;
+    color: var(--accent);
+    font-weight: 700;
   }
 }
 
