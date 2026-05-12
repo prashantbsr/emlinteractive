@@ -33,32 +33,16 @@ export default function HomePage() {
             one operator. every elementary function.
           </h1>
           <p className="max-w-2xl text-base text-muted-foreground md:text-lg">
-            A single binary primitive —{" "}
+            A single binary primitive,{" "}
             <code className="rounded-sm bg-muted px-1.5 py-0.5 text-foreground">
               eml(x, y) = exp(x) − ln(y)
-            </code>{" "}
-            — paired with the constant{" "}
+            </code>, paired with the constant{" "}
             <code className="rounded-sm bg-muted px-1.5 py-0.5 text-foreground">
               1
-            </code>{" "}
-            is enough to rebuild the entire toolbox of a scientific calculator.
+            </code>, is enough to rebuild the entire toolbox of a scientific calculator.
             Notes, decompositions, and implications, written for people who
             find this kind of thing fun.
           </p>
-          <div className="flex flex-wrap gap-3 pt-2 font-mono text-xs text-muted-foreground">
-            <span>~3500 words</span>
-            <span>·</span>
-            <span>~12 min read</span>
-            <span>·</span>
-            <a
-              href={PAPER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline decoration-dotted underline-offset-4"
-            >
-              arXiv:2603.21852v2 ↗
-            </a>
-          </div>
         </header>
 
         {/* 1. Overview */}
