@@ -98,7 +98,7 @@ export default function HomePage() {
           function can be synthesized from{" "}
           <a href="https://en.wikipedia.org/wiki/Sheffer_stroke">NAND</a>{" "}
           alone. NAND is the <em>Sheffer stroke</em> for classical logic. What
-          continuous mathematics had been missing was an analogous primitive —
+          continuous mathematics had been missing was an analogous primitive:
           a single operator from which{" "}
           <em>all of the usual elementary functions</em> could be composed.
         </p>
@@ -112,7 +112,7 @@ eml(x, y) = exp(x) − ln(y)`}</code>
         <p>
           together with the single literal <code>1</code>, is proven to
           generate every elementary function. That's it. No +, no ×, no
-          trigonometric identities in the axioms — only <code>eml</code> and{" "}
+          trigonometric identities in the axioms, only <code>eml</code> and{" "}
           <code>1</code>, nested into binary trees.
         </p>
         <p>
@@ -141,7 +141,7 @@ EML    → 2 primitives   ← eml, 1`}</code>
           outlet. Pour a number into the left inlet, another into the right,
           and the machine spits out{" "}
           <code>exp(left) − ln(right)</code>. The two inlets are not
-          interchangeable — <code>exp</code> is applied to the first,{" "}
+          interchangeable, <code>exp</code> is applied to the first,{" "}
           <code>ln</code> to the second. The machine is{" "}
           <strong>non-commutative</strong>, which matters: every tree you can
           build has a definite shape.
@@ -159,7 +159,7 @@ EML    → 2 primitives   ← eml, 1`}</code>
         <p>
           Surprisingly, this skeletal grammar is expressive enough to
           reconstruct every function on your calculator. <em>Euler's number{" "}
-          </em> <code>e</code> is not a separate primitive — it is the
+          </em> <code>e</code> is not a separate primitive, it is the
           one-node expression{" "}
           <code>eml(1, 1) = exp(1) − ln(1) = e</code>. The function{" "}
           <code>exp(x)</code> becomes <code>eml(x, 1)</code>, because{" "}
@@ -235,7 +235,7 @@ EML    → 2 primitives   ← eml, 1`}</code>
           <code>exp(a) − ln(b)</code>.
         </p>
 
-        <h3 id="ex-e">e — depth 1</h3>
+        <h3 id="ex-e">e, depth 1</h3>
         <pre>
           <code>{`e  =  eml(1, 1)
     =  exp(1) − ln(1)
@@ -247,7 +247,7 @@ EML    → 2 primitives   ← eml, 1`}</code>
           never an axiom here; it falls out of the operator for free.
         </p>
 
-        <h3 id="ex-exp">exp(x) — depth 1</h3>
+        <h3 id="ex-exp">exp(x), depth 1</h3>
         <pre>
           <code>{`exp(x)  =  eml(x, 1)
         =  exp(x) − ln(1)
@@ -258,7 +258,7 @@ EML    → 2 primitives   ← eml, 1`}</code>
           silences the right branch.
         </p>
 
-        <h3 id="ex-zero">0 — depth 3</h3>
+        <h3 id="ex-zero">0, depth 3</h3>
         <pre>
           <code>{`0  =  eml(1, eml(eml(1, 1), 1))
    =  exp(1) − ln(exp(e) − 0)
@@ -271,24 +271,24 @@ EML    → 2 primitives   ← eml, 1`}</code>
           <code>1</code> as a literal.
         </p>
 
-        <h3 id="ex-ln">ln(x) — depth 3</h3>
+        <h3 id="ex-ln">ln(x), depth 3</h3>
         <pre>
           <code>{`ln(x)  =  eml(1, eml(eml(1, x), 1))`}</code>
         </pre>
         <p>
-          The natural log — the operator's own inverse component — lives
+          The natural log, the operator's own inverse component, lives
           three levels deep. This is the depth-3 form from the paper's main
           table.
         </p>
 
-        <h3 id="ex-identity">identity: f(x) = x — depth 4</h3>
+        <h3 id="ex-identity">identity: f(x) = x, depth 4</h3>
         <pre>
           <code>{`x  =  eml(1, eml(eml(1, eml(x, 1)), 1))
    =  ln(exp(x))`}</code>
         </pre>
         <p>
           Even the identity function costs four nested{" "}
-          <code>eml</code> calls — a reminder that the EML tree depth of a
+          <code>eml</code> calls, a reminder that the EML tree depth of a
           function has very little to do with how "simple" it looks in
           school-book notation.
         </p>
@@ -311,7 +311,7 @@ multiply  : depth 8`}</code>
         <p>
           Multiplication being deeper than division is the kind of fact that
           rewires your sense of what "elementary" means. In EML, operator
-          depth is the honest measure — not familiarity.
+          depth is the honest measure, not familiarity.
         </p>
         <p>
           You can play with any of these (and build your own) in the{" "}
@@ -330,7 +330,7 @@ multiply  : depth 8`}</code>
         <p>
           Symbolic regression systems search over expression trees to fit
           data. The search space is usually indexed by the grammar of
-          allowed operators — typically +, −, ×, ÷, <code>exp</code>,{" "}
+          allowed operators, typically +, −, ×, ÷, <code>exp</code>,{" "}
           <code>ln</code>, <code>sin</code>, and so on. A space with{" "}
           <em>one</em> operator is dramatically smaller, more uniform, and
           easier to enumerate. Depth becomes a single honest complexity
@@ -353,7 +353,7 @@ multiply  : depth 8`}</code>
           Intermediate representations over a minimal operator set are
           easier to reason about: every pass, pattern-match, and rewrite
           rule only has to cover one operator. EML suggests a canonical
-          normal form for elementary expressions — useful for equivalence
+          normal form for elementary expressions, useful for equivalence
           checking, superoptimization, and as a teaching target.
         </p>
 
@@ -400,8 +400,8 @@ multiply  : depth 8`}</code>
             <strong>Numerical stability.</strong> <code>exp</code> blows up
             fast; <code>ln</code> hates non-positive inputs. Evaluating a
             deep EML tree naively is a recipe for overflow. Are there
-            reformulations — log-domain, interval-arithmetic, mixed
-            precision — that keep the algebra but stabilize the arithmetic?
+            reformulations, log-domain, interval-arithmetic, mixed
+            precision, that keep the algebra but stabilize the arithmetic?
           </li>
           <li>
             <strong>Sheffer-stroke cousins.</strong> Are there other
@@ -410,7 +410,7 @@ multiply  : depth 8`}</code>
           </li>
           <li>
             <strong>Beyond elementary.</strong> Can the idea be extended
-            past elementary functions — to special functions, distributions,
+            past elementary functions, to special functions, distributions,
             operators on Hilbert spaces? The natural Sheffer-stroke question
             doesn't stop at calculus.
           </li>
