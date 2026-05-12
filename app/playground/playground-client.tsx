@@ -22,7 +22,7 @@ interface Example {
 const EXAMPLES: Example[] = [
   { label: "e", expr: "eml(1, 1)", note: "Euler's number: exp(1) − ln(1) = e" },
   { label: "exp(x)", expr: "eml(x, 1)", note: "The single-node exponential" },
-  { label: "0", expr: "eml(1, eml(eml(1, 1), 1))", note: "Zero isn't free — depth 3" },
+  { label: "0", expr: "eml(1, eml(eml(1, 1), 1))", note: "Zero isn't free, depth 3" },
   { label: "exp(e)", expr: "eml(eml(1, 1), 1)", note: "Nested: exp applied to e" },
   {
     label: "ln(x)",
@@ -32,7 +32,7 @@ const EXAMPLES: Example[] = [
   {
     label: "identity",
     expr: "eml(1, eml(eml(1, eml(x, 1)), 1))",
-    note: "ln(exp(x)) = x — four nested eml calls",
+    note: "ln(exp(x)) = x, four nested eml calls",
   },
 ];
 
@@ -174,7 +174,7 @@ function ReplClient() {
           <CardContent className="space-y-3">
             {!parsed.ok ? (
               <div className="rounded-md border border-destructive/40 bg-destructive/5 px-3 py-2 text-sm text-destructive">
-                Parse error — {parsed.error}
+                Parse error, {parsed.error}
               </div>
             ) : !evaluation?.ok ? (
               <div className="rounded-md border border-destructive/40 bg-destructive/5 px-3 py-2 text-sm text-destructive">
