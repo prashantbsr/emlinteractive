@@ -377,7 +377,50 @@ multiply  : depth 8`}</code>
           "matmul + nonlinearity."
         </p>
 
-        {/* 6. Potential */}
+        {/* 6. ISA question */}
+        <h2 id="isa-question">Could we build a chip on it?</h2>
+        <p>
+          Once you accept that the EML operator is functionally complete, the
+          obvious next thought is hardware. If NAND-only logic gave us the
+          modern CPU, would EML-only silicon give us a leaner scientific
+          calculator, or a leaner anything? This question turns out to be
+          genuinely subtle, and worth working through, because the answer
+          tells you something about why ISAs are shaped the way they are.
+        </p>
+
+        <h3 id="isa-q1">
+          1. Is an EML-only calculator more efficient than a conventional one?
+        </h3>
+        <p>
+          Short answer: <strong>almost certainly no.</strong> The NAND
+          analogy hides a load-bearing detail. NAND wins because it has{" "}
+          <em>two</em> properties, functional completeness <em>and</em> a
+          cheap primitive (≈4 transistors in CMOS) plus bounded expansion
+          (every Boolean function maps to a NAND circuit of comparable
+          size). EML has only the first.
+        </p>
+        <p>
+          Per-gate cost in silicon is brutal here. ADD is roughly one cycle
+          and a tiny area; MUL is 3–5 cycles. <code>exp</code> and{" "}
+          <code>ln</code> each take ~15–30 cycles and large area (LUT +
+          polynomial, or CORDIC). One EML node is therefore exp + ln + sub,
+          on the order of 30–60 cycles. Now overlay the depths from Table 4:
+          a multiply is depth 8, so an EML-multiply is roughly{" "}
+          <code>8 × 60 = ~480 cycles</code> with 16 transcendentals chained,
+          versus 4 cycles for a conventional MUL. That's a ~100× slowdown
+          and orders of magnitude more area for a single op.
+        </p>
+        <p>
+          Numerical stability is the second knife. Every EML node stacks an{" "}
+          <code>exp</code> over a <code>ln</code>; a depth-8 multiply
+          composes 16 transcendentals, each injecting roughly one ULP of
+          error. IEEE-754 add/mul guarantees 0.5 ULP. EML-composed multiply
+          has no such bound. So an EML calculator wouldn't just be slower;
+          it would be <em>less accurate</em> than the $2 microcontroller it
+          was trying to replace.
+        </p>
+
+        {/* 7. Potential */}
         <h2 id="potential">Potential &amp; open problems</h2>
         <p>
           The paper proves existence. It does not, for most functions, prove
