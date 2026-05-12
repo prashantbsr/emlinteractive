@@ -464,6 +464,53 @@ multiply  : depth 8`}</code>
           magnitude hole with 20% gains.
         </p>
 
+        <h3 id="isa-q3">3. The clean-slate chip lesson</h3>
+        <p>
+          Every clean-slate architecture in the last 30 years, Itanium,
+          Transmeta, the Mill, RISC-V, Apple Silicon, Tenstorrent, still
+          uses ADD/SUB/MUL/FMA as primitives. Not because of legacy, but
+          because physics makes those cheapest. The clean-slate{" "}
+          <em>winners</em> (TPU, GPU) won by adding <em>more specialization</em>
+          {" "}(matmul units, tensor cores, RT cores, NPUs, AMX, media
+          codecs), not by unifying around a single primitive.
+        </p>
+        <p>
+          The direction of efficiency in modern hardware is therefore the
+          opposite of EML. <em>More primitives for more workloads</em>, not
+          fewer. EML is a deeply elegant theoretical result and a terrible
+          general-purpose chip.
+        </p>
+
+        <h3 id="isa-q4">4. Where EML-native silicon could actually win</h3>
+        <p>
+          Two narrow but real niches:
+        </p>
+        <ul>
+          <li>
+            <strong>Analog / log-domain circuits.</strong> The transistor
+            I-V curve is literally exponential, so <code>exp</code> and{" "}
+            <code>ln</code> are essentially free at the device boundary.
+            Translinear circuits, Gilbert cells, log-domain filters, EML
+            primitives fit naturally. Tradeoff: ~8-bit effective precision,
+            unsuitable for IEEE 754, potentially attractive for low-precision
+            ML inference.
+          </li>
+          <li>
+            <strong>Workloads that are already mostly transcendentals.</strong>
+            {" "}Bayesian inference, certain physics simulations, attention
+            variants. If you're paying for <code>exp</code>/<code>ln</code>{" "}
+            anyway, the EML pair isn't extra cost. But you'd just expose{" "}
+            <code>exp</code> and <code>ln</code> directly, no reason to
+            funnel everything through the EML composition.
+          </li>
+        </ul>
+        <p>
+          The honest summary: <em>completeness</em> is about what's
+          expressible; <em>efficiency</em> is about expansion factor times
+          primitive cost. EML wins the first decisively and loses the
+          second decisively. Beautiful theory; not a chip.
+        </p>
+
         {/* 7. Potential */}
         <h2 id="potential">Potential &amp; open problems</h2>
         <p>
