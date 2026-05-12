@@ -76,7 +76,7 @@ export const library: EMLFunctionSpec[] = [
     arity: 0,
     tree: eConst,
     variables: [],
-    domain: "—",
+    domain: "n/a",
     sampleInputs: {},
     category: "constant",
     description:
@@ -98,7 +98,7 @@ export const library: EMLFunctionSpec[] = [
     arity: 0,
     tree: zeroConst,
     variables: [],
-    domain: "—",
+    domain: "n/a",
     sampleInputs: {},
     category: "constant",
     description:
