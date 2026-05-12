@@ -427,11 +427,11 @@ multiply  : depth 8`}</code>
 
         <div className="not-prose mt-16 border border-border bg-card p-4 font-mono text-xs text-muted-foreground">
           <div className="text-muted-foreground/70">
-            // end of article
+            end of article
           </div>
           <p className="mt-2 text-foreground">
             <span className="text-primary">&gt;</span> questions, corrections,
-            better decompositions? this is a learning playground — fork it,
+            better decompositions? this is a learning playground, fork it,
             break it, send patches.
           </p>
         </div>
