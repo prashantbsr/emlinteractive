@@ -2,25 +2,25 @@
 
 The paper starts with the "button set" of a standard scientific calculator and collapses it, one stage at a time, until only `eml` and `1` remain.
 
-## Calc 3 — 6 primitives
+## Calc 3, 6 primitives
 
 Drop everything a polynomial ring can imply from exp/ln and closure under arithmetic.
 Keep: `{exp, ln, negation, reciprocal, +}` plus rational constants.
 
-## Calc 2 — 4 primitives
+## Calc 2, 4 primitives
 
 Fuse `negation` and `+` into subtraction. Reciprocal becomes derivable from `exp(−ln(x))`.
 Keep: `{exp, ln, −}` plus rational constants.
 
-## Calc 1 — 3 primitives
+## Calc 1, 3 primitives
 
 Swap the pair of transcendental functions for a single pair `{exponentiation, logarithm}` that can take base arguments, plus one transcendental constant (`e` or `π`).
 
-## Calc 0 — 3 primitives
+## Calc 0, 3 primitives
 
 Promote to the two univariate functions `exp(x)` and `ln(x)`, plus arithmetic via their interplay. Constants emerge automatically.
 
-## EML — 2 primitives
+## EML, 2 primitives
 
 Notice the identity:
 
@@ -28,7 +28,7 @@ Notice the identity:
 exp(x) − ln(y) = eml(x, y)
 ```
 
-and that you never need `exp` and `ln` *separately* — you only ever need to compute the combination `exp(something) − ln(something)`. So glue them into one operator. The constant `1` is preserved because `ln(1) = 0` is what lets `eml(x, 1) = exp(x)`.
+and that you never need `exp` and `ln` *separately*, you only ever need to compute the combination `exp(something) − ln(something)`. So glue them into one operator. The constant `1` is preserved because `ln(1) = 0` is what lets `eml(x, 1) = exp(x)`.
 
 ## Why it lands at 2
 
