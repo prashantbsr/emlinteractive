@@ -44,26 +44,31 @@
     --fs: 14px;
     --lh: 1.45;
 
-    --background: 40 12% 97%;
-    --foreground: 220 20% 14%;
-    --card: 40 10% 99%;
-    --card-foreground: 220 20% 14%;
-    --popover: 40 10% 99%;
-    --popover-foreground: 220 20% 14%;
-    --primary: 155 60% 32%;
-    --primary-foreground: 40 12% 97%;
-    --secondary: 220 10% 92%;
-    --secondary-foreground: 220 20% 14%;
-    --muted: 220 10% 93%;
-    --muted-foreground: 220 10% 42%;
-    --accent: 155 30% 88%;
-    --accent-foreground: 155 60% 22%;
-    --destructive: 0 65% 45%;
-    --destructive-foreground: 40 12% 97%;
-    --border: 220 10% 86%;
-    --input: 220 10% 86%;
-    --ring: 155 60% 32%;
-    --radius: 0.25rem;
+    /* ── shadcn token map — Plotter palette in HSL ───────────────────── */
+    --background:           45 39% 88%;   /* #ECE6D4 paper            */
+    --foreground:            0  0% 10%;   /* #1A1A1A graphite         */
+    --card:                 45 53% 94%;   /* #F8F4E8 hilite           */
+    --card-foreground:       0  0% 10%;
+    --popover:              45 53% 94%;
+    --popover-foreground:    0  0% 10%;
+    --primary:             230 53% 35%;   /* #2A3A8A indigo           */
+    --primary-foreground:   45 53% 94%;   /* hilite                   */
+    --secondary:            40 14% 80%;   /* light shadow / muted paper */
+    --secondary-foreground:  0  0% 10%;
+    --muted:                40 14% 82%;
+    --muted-foreground:     33  9% 38%;   /* #6A6258 pencil           */
+    /* Tailwind shadcn `accent` slot — hover-surface tint, HSL only.
+       Note: this is the shadcn slot, NOT the brand accent (--accent above).
+       Routed through --ui-accent in tailwind.config.ts to avoid colliding
+       with the spec-defined --accent hex. */
+    --ui-accent:            45 53% 94%;   /* hilite                   */
+    --accent-foreground:   230 53% 35%;   /* indigo on hilite         */
+    --destructive:           5 63% 44%;   /* #B8362A vermilion        */
+    --destructive-foreground: 45 53% 94%;
+    --border:               40 14% 67%;   /* #B8B0A0 shadow           */
+    --input:                40 14% 67%;
+    --ring:                230 53% 35%;
+    --radius: 0.125rem;                   /* drafting feel — barely rounded */
   }
 
   .dark {
