@@ -447,6 +447,121 @@
     color: var(--accent);
     font-weight: 700;
   }
+  /* ── Contact card — terminal-on-paper with highlighter marks ────── */
+  .contact-card {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+    background: radial-gradient(ellipse at top left, #fdf9ec 0%, #f7f1e1 80%);
+    padding: 22px 28px 24px;
+    color: #1a1612;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow:
+      0 30px 60px -25px rgba(60, 40, 15, 0.35),
+      0 0 0 1px rgba(0, 0, 0, 0.06);
+    font-family: var(--font-mono);
+    border-radius: 2px;
+  }
+  .contact-card .cc-grain {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(120, 90, 40, 0.04) 1px, transparent 1px),
+      radial-gradient(rgba(120, 90, 40, 0.025) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 1px;
+    pointer-events: none;
+  }
+  .contact-card pre {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    position: relative;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background: transparent;
+    color: inherit;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+  .contact-card .cc-prompt { color: #a17a3a; }
+  .contact-card .cc-cmd    { color: #1a1612; }
+  .contact-card .cc-label  { color: #8b7d62; white-space: pre; }
+  .contact-card .cc-name   { font-weight: 700; color: #15110d; }
+  .contact-card .cc-sub    { color: #8b7d62; }
+  .contact-card .cc-spacer { height: 0.7em; }
+
+  .contact-card .cc-row {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+  }
+  .contact-card .cc-value-wrap {
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+  .contact-card .cc-value-wrap:hover { background: transparent; }
+  .contact-card .cc-value {
+    position: relative;
+    display: inline-block;
+    padding: 0 6px;
+    white-space: pre;
+  }
+  .contact-card .cc-mark1,
+  .contact-card .cc-mark2 {
+    position: absolute;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+  .contact-card .cc-mark1 {
+    left: -2px; right: -2px; top: 12%; bottom: 6%;
+    clip-path: polygon(0.5% 8%, 99% 2%, 99.5% 92%, 0% 96%, 0% 50%, 1% 30%);
+    opacity: 0.85;
+    filter: blur(0.25px);
+  }
+  .contact-card .cc-mark2 {
+    left: 2px; right: 4px; top: 30%; bottom: 18%;
+    clip-path: polygon(0.5% 20%, 99% 8%, 99% 80%, 0% 96%, 0% 50%);
+    opacity: 0.5;
+  }
+  .contact-card .cc-txt { position: relative; z-index: 1; }
+
+  .contact-card .cc-v-github .cc-mark1,
+  .contact-card .cc-v-github .cc-mark2 { background: oklch(0.88 0.14 165); }
+  .contact-card .cc-v-github  .cc-mark1 { transform: rotate(-0.55deg); }
+  .contact-card .cc-v-github  .cc-mark2 { transform: rotate(-0.22deg); }
+
+  .contact-card .cc-v-website .cc-mark1,
+  .contact-card .cc-v-website .cc-mark2 { background: oklch(0.88 0.13 50); }
+  .contact-card .cc-v-website .cc-mark1 { transform: rotate(-0.70deg); }
+  .contact-card .cc-v-website .cc-mark2 { transform: rotate(-0.28deg); }
+
+  .contact-card .cc-copytag {
+    margin-left: 12px;
+    font-size: 11px;
+    color: #a17a3a;
+    background: #ede4cf;
+    padding: 2px 7px;
+    letter-spacing: 0.5px;
+  }
+  .contact-card .cc-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    background: #1a1612;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: cc-blink 1s steps(1) infinite;
+  }
+  @keyframes cc-blink {
+    50% { opacity: 0; }
+  }
 }
 
 .react-flow__node {
