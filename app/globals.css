@@ -219,6 +219,20 @@
     font-style: normal;
   }
 
+  .prose-nerd a,
+  .prose-kb a {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .prose-nerd a:hover,
+  .prose-kb a:hover {
+    background: var(--accent);
+    color: var(--accent-fg);
+    text-decoration: none;
+  }
+
   .gradient-text {
     @apply text-primary;
   }
