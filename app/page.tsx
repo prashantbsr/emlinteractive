@@ -29,12 +29,8 @@ export default function HomePage() {
       <article className="prose-nerd max-w-3xl">
         {/* Masthead */}
         <header className="not-prose mb-10 space-y-4 border-b border-border pb-8">
-          <div className="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-muted-foreground">
-            // emlinteractive // 2026 // v0.2
-          </div>
-          <h1 className="font-mono text-4xl font-semibold tracking-tight md:text-5xl">
-            <span className="text-primary">&gt;</span> one operator. every
-            elementary function.
+          <h1 className="font-mono text-4xl font-semibold tracking-tight text-primary md:text-5xl">
+            one operator. every elementary function.
           </h1>
           <p className="max-w-2xl text-base text-muted-foreground md:text-lg">
             A single binary primitive —{" "}
