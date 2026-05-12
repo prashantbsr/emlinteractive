@@ -39,7 +39,7 @@ export default function GalleryPage() {
         <h1 className="text-3xl font-bold tracking-tight">Function Gallery</h1>
         <p className="max-w-2xl text-muted-foreground">
           Each card is an elementary function rebuilt in pure EML. Click one to see the full tree and
-          walk through the derivation. Depth is the height of the EML tree — lower is simpler.
+          walk through the derivation. Depth is the height of the EML tree, lower is simpler.
         </p>
       </div>
 
@@ -76,7 +76,7 @@ export default function GalleryPage() {
             Coming in v2
           </h2>
           <span className="text-xs text-muted-foreground">
-            Paper Table 4 — verified trees pending
+            Paper Table 4, verified trees pending
           </span>
         </div>
         <p className="mt-1 text-sm text-muted-foreground">
