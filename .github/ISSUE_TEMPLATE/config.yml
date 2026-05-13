@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/prashantbsr/emlinteractive/discussions
+    about: Ask a question, share an idea, or discuss the EML paper. Bug reports and feature requests have dedicated templates below.
+  - name: Security report
+    url: https://github.com/prashantbsr/emlinteractive/security/advisories/new
+    about: Report a security issue privately. See SECURITY.md.

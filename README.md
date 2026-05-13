@@ -1,12 +1,21 @@
 # EMLinteractive
 
-i was just curious when i came across this paper, after all, its something like NAND for the mathematics.
+[![CI](https://github.com/prashantbsr/emlinteractive/actions/workflows/ci.yml/badge.svg)](https://github.com/prashantbsr/emlinteractive/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node ≥ 20](https://img.shields.io/badge/node-%E2%89%A520-339933.svg)](.nvmrc)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org)
 
-out of curiosity i researched more about it and ended few shotting a basic webapp describing a few ideas explored by LLM itself and a playground.
+An interactive learning playground for the **EML operator**: a single binary primitive that, paired with the constant `1`, can generate every elementary mathematical function. Based on [Odrzywołek's 2026 paper, *All Elementary Functions from a Single Operator*](https://arxiv.org/html/2603.21852v2).
 
-i had this intuition that maybe a new ISA and chip design can be developed using this. but it also has problems of its own. also got to know about potential of this paper in tracing during LLM development for some things, but its also like walking through the quicksand. maybe in near future some missing piece will be added to this paper, and a whole new possibilities and innovation will arise. but its all a big maybe. because here we are not talking about some patch in a software. we are talking about the very foundations of most complex tech pieces ever built. even if we get to build something efficient, it will be long long time till it gets accepted somewhere.
+**Live demo:** [prashantbsr.github.io/emlinteractive](https://prashantbsr.github.io/emlinteractive)
 
-An interactive learning playground for the **EML operator**: a single binary primitive that, paired with the constant `1`, can generate every elementary mathematical function. From [Odrzywołek's 2026 paper, *All Elementary Functions from a Single Operator*](https://arxiv.org/html/2603.21852v2).
+---
+
+## Why this exists
+
+i was just curious when i came across this paper — after all, it's something like NAND for mathematics. out of curiosity i researched more about it and ended up few-shotting a basic webapp describing a few ideas explored by an LLM, plus a playground.
+
+i had this intuition that maybe a new ISA and chip design could be developed using this. but it also has problems of its own. i also got to know about the potential of this paper in tracing during LLM development for some things, but it's also like walking through quicksand. maybe in the near future some missing piece will be added to this paper, and whole new possibilities and innovation will arise. but it's all a big maybe — because here we are not talking about some patch in a software. we are talking about the very foundations of the most complex tech pieces ever built. even if we get to build something efficient, it will be a long long time till it gets accepted somewhere.
 
 ```
 eml(x, y) = exp(x) − ln(y)
@@ -87,7 +96,11 @@ v0.2. Core engine + REPL + gallery are stable. Calculator ships purely-EML trees
 
 ## Contributing
 
-This is a learning playground. PRs welcome, especially shorter EML decompositions, better visualizations, or knowledge-base articles.
+PRs welcome — especially shorter EML decompositions, better visualisations, and knowledge-base articles. See [CONTRIBUTING.md](CONTRIBUTING.md) for the development setup and pre-PR checks, and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for the community standards we follow. To report a security issue privately, see [SECURITY.md](SECURITY.md).
+
+## License
+
+[MIT](LICENSE).
 
 ## Reference
 

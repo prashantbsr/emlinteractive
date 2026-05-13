@@ -1,6 +1,6 @@
 {
   "name": "emlinteractive",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Interactive learning playground for the EML operator from Odrzywolek's paper on elementary-function completeness.",
   "license": "MIT",
@@ -13,6 +13,10 @@
     "nextjs",
     "education"
   ],
+  "homepage": "https://prashantbsr.github.io/emlinteractive",
+  "bugs": {
+    "url": "https://github.com/prashantbsr/emlinteractive/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prashantbsr/emlinteractive.git"
