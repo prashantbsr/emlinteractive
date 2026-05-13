@@ -175,6 +175,7 @@
     font-family: var(--font-mono);
     line-height: var(--lh);
     max-width: 72ch;
+    min-width: 0;
   }
 
   .prose-nerd h1,
@@ -225,6 +226,10 @@
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
+    /* Long URLs in link text (citations, footnotes) would otherwise be
+       a single unbreakable word and push the page wider than the
+       viewport on mobile. */
+    overflow-wrap: anywhere;
   }
   .prose-nerd a:hover,
   .prose-kb a:hover {
@@ -450,7 +455,10 @@
   /* ── Contact card — terminal-on-paper with highlighter marks ────── */
   .contact-card {
     position: relative;
-    display: inline-block;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
     margin-bottom: 2rem;
     background: radial-gradient(ellipse at top left, #fdf9ec 0%, #f7f1e1 80%);
     padding: 22px 28px 24px;
@@ -694,6 +702,26 @@
 /* ── KaTeX — inherit graphite so equations sit on the page stock ────── */
 .katex {
   color: var(--fg);
+  /* A long inline equation otherwise pushes the paragraph wider than
+     the viewport on mobile (the inline-block doesn't wrap). Cap at
+     line width and let the equation scroll inside its own box. */
+  max-width: 100%;
+}
+.prose-nerd .katex,
+.prose-kb .katex {
+  /* KaTeX defaults .katex to display: inline, which ignores max-width
+     and overflow. Promote to inline-block so the cap actually applies
+     and a long equation can scroll inside its own box on mobile. */
+  display: inline-block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+}
+/* Display math wraps an inner .katex; let the outer .katex-display own
+   the scroll, otherwise we'd end up with a double scroller. */
+.prose-nerd .katex-display > .katex,
+.prose-kb .katex-display > .katex {
+  overflow: visible;
 }
 
 /* Block math gets horizontal overflow on narrow viewports so long
@@ -702,6 +730,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   padding: 2px 0;
+  max-width: 100%;
 }
 
 /* ── Global selection — indigo fill, paper foreground ───────────────── */

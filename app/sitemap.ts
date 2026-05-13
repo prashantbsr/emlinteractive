@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/playground", 0.95),
     stat("/gallery", 0.8),
     stat("/kb", 0.8),
+    stat("/paper", 0.7),
+    stat("/about", 0.6),
     ...library.map((f) => stat(`/gallery/${f.slug}`, 0.7)),
     ...articles.map((a) => stat(`/kb/${a.slug}`, 0.6)),
   ];

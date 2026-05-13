@@ -5,6 +5,10 @@ import { ArrowLeft } from "lucide-react";
 import { articles, getArticle, categoryLabel } from "@/lib/kb/articles";
 import { Badge } from "@/components/ui/badge";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://prashantbsr.github.io/emlinteractive";
+const personId = `${siteUrl}/about#person`;
+
 interface Params {
   params: Promise<{ slug: string }>;
 }
@@ -54,8 +58,28 @@ export default async function KbArticle({ params }: Params) {
   const MDX = await loadMdx(slug);
   if (!MDX) notFound();
 
+  const articleUrl = `${siteUrl}/kb/${meta.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: meta.title,
+    description: meta.summary,
+    keywords: meta.tags.join(", "),
+    inLanguage: "en-US",
+    isPartOf: { "@id": `${siteUrl}#website` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+    url: articleUrl,
+    author: { "@id": personId },
+    creator: { "@id": personId },
+    publisher: { "@id": personId },
+  };
+
   return (
     <article className="prose-kb max-w-none">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mb-4 flex items-center gap-3">
         <Link
           href="/kb"

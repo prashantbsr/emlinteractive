@@ -36,35 +36,8 @@ export function SiteHeader() {
             style={{ color: "var(--accent-fg)" }}
           >
             <span aria-hidden>■</span>
-            <span className="truncate">
-              <span className="sm:hidden">EML</span>
-              <span className="hidden sm:inline">EML: The NAND of Mathematics</span>
-            </span>
+            <span className="truncate">EML: The NAND of Mathematics</span>
           </Link>
-          <div className="flex items-center gap-1">
-            {/* Decorative raised window buttons */}
-            <span
-              aria-hidden
-              className="raised inline-flex h-[18px] w-[22px] items-center justify-center text-[10px] font-bold leading-none"
-              style={{ background: "var(--bg)", color: "var(--fg)" }}
-            >
-              _
-            </span>
-            <span
-              aria-hidden
-              className="raised inline-flex h-[18px] w-[22px] items-center justify-center text-[10px] font-bold leading-none"
-              style={{ background: "var(--bg)", color: "var(--fg)" }}
-            >
-              ▢
-            </span>
-            <span
-              aria-hidden
-              className="raised inline-flex h-[18px] w-[22px] items-center justify-center text-[10px] font-bold leading-none"
-              style={{ background: "var(--bg)", color: "var(--fg)" }}
-            >
-              ✕
-            </span>
-          </div>
         </div>
 
         {/* Menubar */}

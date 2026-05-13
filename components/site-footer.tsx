@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function SiteFooter() {
   return (
     <footer
@@ -21,7 +23,32 @@ export function SiteFooter() {
           </a>
           , A. Odrzywołek (2026)
         </p>
-        <p>exp(x) − ln(y) is all you need</p>
+        <p>
+          by{" "}
+          <Link
+            href="/about"
+            className="underline decoration-1 underline-offset-2 hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:no-underline"
+            style={{ color: "var(--link)" }}
+          >
+            Dr. Prashant Sharma
+          </Link>
+          {" · "}
+          <Link
+            href="/gallery"
+            className="underline decoration-1 underline-offset-2 hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:no-underline"
+            style={{ color: "var(--link)" }}
+          >
+            Gallery
+          </Link>
+          {" · "}
+          <Link
+            href="/kb"
+            className="underline decoration-1 underline-offset-2 hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:no-underline"
+            style={{ color: "var(--link)" }}
+          >
+            KB
+          </Link>
+        </p>
       </div>
     </footer>
   );
