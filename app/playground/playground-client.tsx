@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { TreeView } from "@/components/eml/tree-view";
 import { CalculatorPad } from "@/components/eml/calculator-pad";
+import { MathInline } from "@/components/eml/math";
 import { parse, EMLParseError } from "@/lib/eml/parser";
 import { evaluate, EMLEvalError } from "@/lib/eml/evaluate";
 import { treeDepth, treeSize, leafCount } from "@/lib/eml/depth";
@@ -15,24 +16,51 @@ import { cn, formatNumber } from "@/lib/utils";
 
 interface Example {
   label: string;
+  labelTex: string;
   expr: string;
+  noteTex?: string;
   note: string;
 }
 
 const EXAMPLES: Example[] = [
-  { label: "e", expr: "eml(1, 1)", note: "Euler's number: exp(1) − ln(1) = e" },
-  { label: "exp(x)", expr: "eml(x, 1)", note: "The single-node exponential" },
-  { label: "0", expr: "eml(1, eml(eml(1, 1), 1))", note: "Zero isn't free, depth 3" },
-  { label: "exp(e)", expr: "eml(eml(1, 1), 1)", note: "Nested: exp applied to e" },
+  {
+    label: "e",
+    labelTex: String.raw`e`,
+    expr: "eml(1, 1)",
+    note: "Euler's number: exp(1) − ln(1) = e",
+    noteTex: String.raw`\text{Euler's number: } \exp(1) - \ln(1) = e`,
+  },
+  {
+    label: "exp(x)",
+    labelTex: String.raw`\exp(x)`,
+    expr: "eml(x, 1)",
+    note: "The single-node exponential",
+  },
+  {
+    label: "0",
+    labelTex: String.raw`0`,
+    expr: "eml(1, eml(eml(1, 1), 1))",
+    note: "Zero isn't free, depth 3",
+  },
+  {
+    label: "exp(e)",
+    labelTex: String.raw`\exp(e)`,
+    expr: "eml(eml(1, 1), 1)",
+    note: "Nested: exp applied to e",
+    noteTex: String.raw`\text{Nested: } \exp \text{ applied to } e`,
+  },
   {
     label: "ln(x)",
+    labelTex: String.raw`\ln(x)`,
     expr: "eml(1, eml(eml(1, x), 1))",
     note: "Classic depth-3 tree from the paper",
   },
   {
     label: "identity",
+    labelTex: String.raw`\mathrm{id}(x)`,
     expr: "eml(1, eml(eml(1, eml(x, 1)), 1))",
     note: "ln(exp(x)) = x, four nested eml calls",
+    noteTex: String.raw`\ln(\exp(x)) = x,\ \text{four nested }\operatorname{eml}\text{ calls}`,
   },
 ];
 
@@ -190,7 +218,9 @@ function ReplClient() {
             )}
             {hasVar && (
               <div className="flex items-center gap-3 pt-1">
-                <label className="text-sm text-muted-foreground">x =</label>
+                <label className="text-sm text-muted-foreground">
+                  <MathInline>{String.raw`x \;=`}</MathInline>
+                </label>
                 <Input
                   type="number"
                   step="0.1"
@@ -253,13 +283,17 @@ function ReplClient() {
                 className="w-full rounded-md border border-border bg-background px-3 py-2 text-left text-sm transition-colors hover:border-primary/50 hover:bg-accent"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono font-semibold">{ex.label}</span>
+                  <span className="font-semibold">
+                    <MathInline>{ex.labelTex}</MathInline>
+                  </span>
                   <Badge variant="muted" className="text-[10px]">
                     insert
                   </Badge>
                 </div>
                 <code className="mt-1 block truncate text-xs text-muted-foreground">{ex.expr}</code>
-                <p className="mt-1 text-xs text-muted-foreground">{ex.note}</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {ex.noteTex ? <MathInline>{ex.noteTex}</MathInline> : ex.note}
+                </p>
               </button>
             ))}
           </CardContent>
@@ -270,16 +304,25 @@ function ReplClient() {
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-muted-foreground">
             <p>
-              <span className="font-mono text-foreground">eml(x, y) = exp(x) − ln(y)</span>
+              <MathInline>
+                {String.raw`\operatorname{eml}(x,\, y) = \exp(x) - \ln(y)`}
+              </MathInline>
             </p>
             <p>
               Only two primitives are allowed: the operator{" "}
-              <span className="font-mono text-foreground">eml</span> and the constant{" "}
-              <span className="font-mono text-foreground">1</span>. Every valid expression is a binary
+              <MathInline>{String.raw`\operatorname{eml}`}</MathInline> and the constant{" "}
+              <MathInline>{String.raw`1`}</MathInline>. Every valid expression is a binary
               tree matching the grammar:
             </p>
-            <pre className="rounded-md bg-muted p-2 text-xs">S → 1 | eml(S, S)</pre>
-            <p>Variables like <span className="font-mono text-foreground">x</span> are allowed here so you can watch parametric trees update.</p>
+            <div className="rounded-md bg-muted p-2 text-center">
+              <MathInline>
+                {String.raw`S \;\to\; 1 \;\mid\; \operatorname{eml}(S,\, S)`}
+              </MathInline>
+            </div>
+            <p>
+              Variables like <MathInline>{String.raw`x`}</MathInline> are allowed here so
+              you can watch parametric trees update.
+            </p>
           </CardContent>
         </Card>
       </div>

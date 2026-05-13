@@ -106,6 +106,11 @@ export interface CalcOpSpec {
   guard?: (env: Record<string, number>) => string | null;
   // human-readable identity used by the UI
   formula: string;
+  // KaTeX-renderable variants. `labelTex` mirrors `label` but in LaTeX, with
+  // the same `x`/`y` variable conventions; numeric substitution still works
+  // because the substitution regex only requires non-letter delimiters.
+  labelTex: string;
+  formulaTex: string;
 }
 
 const positive = (key: string) => (env: Record<string, number>) =>
@@ -136,6 +141,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     arity: 0,
     tree: E_TREE,
     formula: "eml(1, 1)",
+    labelTex: String.raw`e`,
+    formulaTex: String.raw`\operatorname{eml}(1,\, 1)`,
   },
   zero: {
     id: "zero",
@@ -143,6 +150,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     arity: 0,
     tree: ZERO_TREE,
     formula: "eml(1, eml(eml(1, 1), 1))",
+    labelTex: String.raw`0`,
+    formulaTex: String.raw`\operatorname{eml}\bigl(1,\, \operatorname{eml}(\operatorname{eml}(1, 1),\, 1)\bigr)`,
   },
   exp: {
     id: "exp",
@@ -150,6 +159,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     arity: 1,
     tree: buildExp(X()),
     formula: "eml(x, 1)",
+    labelTex: String.raw`\exp(x)`,
+    formulaTex: String.raw`\operatorname{eml}(x,\, 1)`,
   },
   ln: {
     id: "ln",
@@ -158,6 +169,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildLn(X()),
     guard: positive("x"),
     formula: "eml(1, eml(eml(1, x), 1))",
+    labelTex: String.raw`\ln(x)`,
+    formulaTex: String.raw`\operatorname{eml}\bigl(1,\, \operatorname{eml}(\operatorname{eml}(1, x),\, 1)\bigr)`,
   },
   neg: {
     id: "neg",
@@ -166,6 +179,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildNeg(X()),
     guard: inShiftRange("x"),
     formula: "(K - x) - K, with K = exp(e) = e^e ≈ 15.15",
+    labelTex: String.raw`-x`,
+    formulaTex: String.raw`(K - x) - K,\ \ K = e^{e} \approx 15.15`,
   },
   recip: {
     id: "recip",
@@ -174,6 +189,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildRecip(X()),
     guard: positive("x"),
     formula: "exp(-ln(x))",
+    labelTex: String.raw`\dfrac{1}{x}`,
+    formulaTex: String.raw`\exp\bigl(-\ln x\bigr)`,
   },
   square: {
     id: "square",
@@ -182,6 +199,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildSquare(X()),
     guard: positive("x"),
     formula: "exp(ln(x) + ln(x))",
+    labelTex: String.raw`x^{2}`,
+    formulaTex: String.raw`\exp\bigl(\ln x + \ln x\bigr)`,
   },
   cube: {
     id: "cube",
@@ -190,6 +209,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildCube(X()),
     guard: positive("x"),
     formula: "exp(ln(x) + ln(x) + ln(x))",
+    labelTex: String.raw`x^{3}`,
+    formulaTex: String.raw`\exp\bigl(\ln x + \ln x + \ln x\bigr)`,
   },
   sqrt: {
     id: "sqrt",
@@ -198,6 +219,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildSqrt(X()),
     guard: positive("x"),
     formula: "exp((ln(x) + K)/2 - K/2)",
+    labelTex: String.raw`\sqrt{x}`,
+    formulaTex: String.raw`\exp\!\left(\tfrac{\ln x + K}{2} - \tfrac{K}{2}\right)`,
   },
   add: {
     id: "add",
@@ -213,6 +236,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
       return null;
     },
     formula: "((K - (-x)) - (-y)) - K",
+    labelTex: String.raw`x + y`,
+    formulaTex: String.raw`\bigl((K - (-x)) - (-y)\bigr) - K`,
   },
   sub: {
     id: "sub",
@@ -221,6 +246,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildSub(X(), Y()),
     guard: positive("x"),
     formula: "exp(ln(x)) - ln(exp(y))",
+    labelTex: String.raw`x - y`,
+    formulaTex: String.raw`\exp\bigl(\ln x\bigr) - \ln\bigl(\exp y\bigr)`,
   },
   mul: {
     id: "mul",
@@ -229,6 +256,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildMul(X(), Y()),
     guard: positives("x", "y"),
     formula: "exp(ln(x) + ln(y))",
+    labelTex: String.raw`x \times y`,
+    formulaTex: String.raw`\exp\bigl(\ln x + \ln y\bigr)`,
   },
   div: {
     id: "div",
@@ -237,6 +266,8 @@ export const CALC_OPS: Record<string, CalcOpSpec> = {
     tree: buildDiv(X(), Y()),
     guard: positives("x", "y"),
     formula: "exp(ln(x) + ln(1/y))",
+    labelTex: String.raw`x \div y`,
+    formulaTex: String.raw`\exp\!\left(\ln x + \ln \tfrac{1}{y}\right)`,
   },
 };
 

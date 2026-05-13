@@ -542,14 +542,16 @@
   .contact-card .cc-v-website .cc-mark1 { transform: rotate(-0.70deg); }
   .contact-card .cc-v-website .cc-mark2 { transform: rotate(-0.28deg); }
 
-  .contact-card .cc-copytag {
-    margin-left: 12px;
-    font-size: 11px;
-    color: #a17a3a;
-    background: #ede4cf;
-    padding: 2px 7px;
-    letter-spacing: 0.5px;
-  }
+  .contact-card .cc-v-email .cc-mark1,
+  .contact-card .cc-v-email .cc-mark2 { background: oklch(0.88 0.14 320); }
+  .contact-card .cc-v-email .cc-mark1 { transform: rotate(-0.40deg); }
+  .contact-card .cc-v-email .cc-mark2 { transform: rotate(-0.18deg); }
+
+  .contact-card .cc-v-linkedin .cc-mark1,
+  .contact-card .cc-v-linkedin .cc-mark2 { background: oklch(0.88 0.13 235); }
+  .contact-card .cc-v-linkedin .cc-mark1 { transform: rotate(-0.62deg); }
+  .contact-card .cc-v-linkedin .cc-mark2 { transform: rotate(-0.24deg); }
+
   .contact-card .cc-cursor {
     display: inline-block;
     width: 0.55em;
@@ -676,6 +678,17 @@
 }
 .react-flow__background {
   background-color: var(--bg);
+}
+
+/* ── EML tree canvas — locked to a dark theme regardless of site theme.
+   The playground tree always renders bright nodes on a black canvas, so
+   ReactFlow's themed background + edge stroke get overridden here.   ── */
+.eml-tree-canvas .react-flow__background {
+  background-color: #000;
+}
+.eml-tree-canvas .react-flow__edge-path,
+.dark .eml-tree-canvas .react-flow__edge-path {
+  stroke: rgb(148 163 184);
 }
 
 /* ── KaTeX — inherit graphite so equations sit on the page stock ────── */
