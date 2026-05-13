@@ -1,42 +1,40 @@
-"use client";
-
-import { useState } from "react";
-
 type Row = {
   key: string;
   label: string;
   value: string;
+  display?: string;
   href: string;
 };
 
 const rows: Row[] = [
   {
     key: "github",
-    label: "GITHUB ",
+    label: "GITHUB  ",
     value: "github.com/prashantbsr",
     href: "https://github.com/prashantbsr",
   },
   {
     key: "website",
-    label: "WEBSITE",
+    label: "WEBSITE ",
     value: "prashant.pensievelabs.org",
     href: "https://prashant.pensievelabs.org",
+  },
+  {
+    key: "email",
+    label: "EMAIL   ",
+    value: "ceo@pensievelabs.org",
+    href: "mailto:ceo@pensievelabs.org",
+  },
+  {
+    key: "linkedin",
+    label: "LINKEDIN",
+    value: "www.linkedin.com/in/dr-prashant-sharma-pensieve-trishulguy",
+    display: "Dr. Prashant Sharma on LinkedIn",
+    href: "https://www.linkedin.com/in/dr-prashant-sharma-pensieve-trishulguy",
   },
 ];
 
 export function ContactCard() {
-  const [copied, setCopied] = useState<string | null>(null);
-
-  async function handleCopy(key: string, text: string) {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(key);
-      setTimeout(() => setCopied(null), 1400);
-    } catch {
-      /* clipboard unavailable */
-    }
-  }
-
   return (
     <aside className="contact-card not-prose">
       <div className="cc-grain" aria-hidden />
@@ -61,22 +59,13 @@ export function ContactCard() {
             target="_blank"
             rel="noopener noreferrer"
             className="cc-value-wrap"
-            onClick={(e) => {
-              if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-              e.preventDefault();
-              handleCopy(row.key, row.value);
-            }}
-            aria-label={`Copy ${row.value} (cmd-click to open)`}
           >
             <span className={`cc-value cc-v-${row.key}`}>
               <span className="cc-mark1" aria-hidden />
               <span className="cc-mark2" aria-hidden />
-              <span className="cc-txt">{row.value}</span>
+              <span className="cc-txt">{row.display ?? row.value}</span>
             </span>
           </a>
-          <span className="cc-copytag" aria-live="polite">
-            {copied === row.key ? "copied ✓" : "↵ copy"}
-          </span>
         </div>
       ))}
       <div className="cc-spacer" />

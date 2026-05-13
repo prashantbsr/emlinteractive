@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Toc, TocMobileBar, type TocEntry } from "@/components/landing/toc";
 import { ContactCard } from "@/components/landing/contact-card";
+import { MathInline, MathBlock } from "@/components/eml/math";
 
 const toc: TocEntry[] = [
   { id: "overview", label: "Overview", level: 2 },
@@ -35,14 +36,11 @@ export default function HomePage() {
           </h1>
           <p className="max-w-2xl text-base text-muted-foreground md:text-lg">
             A single binary primitive,{" "}
-            <code className="rounded-sm bg-muted px-1.5 py-0.5 text-foreground">
-              eml(x, y) = exp(x) − ln(y)
-            </code>, paired with the constant{" "}
-            <code className="rounded-sm bg-muted px-1.5 py-0.5 text-foreground">
-              1
-            </code>, is enough to rebuild the entire toolbox of a scientific calculator.
-            Notes, decompositions, and implications, written for people who
-            find this kind of thing fun.
+            <MathInline>{String.raw`\operatorname{eml}(x, y) = \exp(x) - \ln(y)`}</MathInline>
+            , paired with the constant{" "}
+            <MathInline>{String.raw`1`}</MathInline>, is enough to rebuild the
+            entire toolbox of a scientific calculator. Notes, decompositions,
+            and implications, written for people who find this kind of thing fun.
           </p>
         </header>
 
@@ -106,19 +104,22 @@ export default function HomePage() {
         <p>
           Odrzywołek's 2026 paper nominates one. The operator
         </p>
-        <pre>
-          <code>{`eml : R × R₊ → R
-eml(x, y) = exp(x) − ln(y)`}</code>
-        </pre>
+        <MathBlock>
+          {String.raw`\operatorname{eml} : \mathbb{R} \times \mathbb{R}_{+} \to \mathbb{R}, \qquad \operatorname{eml}(x, y) = \exp(x) - \ln(y)`}
+        </MathBlock>
         <p>
-          together with the single literal <code>1</code>, is proven to
-          generate every elementary function. That's it. No +, no ×, no
-          trigonometric identities in the axioms, only <code>eml</code> and{" "}
-          <code>1</code>, nested into binary trees.
+          together with the single literal{" "}
+          <MathInline>{String.raw`1`}</MathInline>, is proven to generate every
+          elementary function. That's it. No{" "}
+          <MathInline>{String.raw`+`}</MathInline>, no{" "}
+          <MathInline>{String.raw`\times`}</MathInline>, no trigonometric
+          identities in the axioms, only{" "}
+          <MathInline>{String.raw`\operatorname{eml}`}</MathInline> and{" "}
+          <MathInline>{String.raw`1`}</MathInline>, nested into binary trees.
         </p>
         <p>
           A scientific calculator ships with around thirty-six labeled
-          operations (exp, ln, sin, cos, +, −, ×, ÷, π, e, √, x², x^y, …).
+          operations (<MathInline>{String.raw`\exp,\ \ln,\ \sin,\ \cos,\ +,\ -,\ \times,\ \div,\ \pi,\ e,\ \sqrt{\;},\ x^{2},\ x^{y},\ \dots`}</MathInline>).
           The paper reduces that alphabet, one item at a time, to{" "}
           <strong>two</strong> primitives. Five stages, each smaller than the
           last:
@@ -138,34 +139,42 @@ EML    → 2 primitives   ← eml, 1`}</code>
         {/* 2. Intuition */}
         <h2 id="intuition">Plain-English intuition</h2>
         <p>
-          Think of <code>eml</code> as a small machine with two inlets and one
-          outlet. Pour a number into the left inlet, another into the right,
-          and the machine spits out{" "}
-          <code>exp(left) − ln(right)</code>. The two inlets are not
-          interchangeable, <code>exp</code> is applied to the first,{" "}
-          <code>ln</code> to the second. The machine is{" "}
-          <strong>non-commutative</strong>, which matters: every tree you can
-          build has a definite shape.
+          Think of <MathInline>{String.raw`\operatorname{eml}`}</MathInline> as
+          a small machine with two inlets and one outlet. Pour a number into
+          the left inlet, another into the right, and the machine spits out{" "}
+          <MathInline>{String.raw`\exp(\text{left}) - \ln(\text{right})`}</MathInline>
+          . The two inlets are not interchangeable,{" "}
+          <MathInline>{String.raw`\exp`}</MathInline> is applied to the first,{" "}
+          <MathInline>{String.raw`\ln`}</MathInline> to the second. The machine
+          is <strong>non-commutative</strong>, which matters: every tree you
+          can build has a definite shape.
         </p>
         <p>
           Now restrict yourself further: the only raw ingredient you're
-          allowed to drop into the inlets is the number <code>1</code>, or
-          the output of <em>another</em> <code>eml</code> machine. You may
-          plumb machines into each other without limit. That is the entire
-          grammar:
+          allowed to drop into the inlets is the number{" "}
+          <MathInline>{String.raw`1`}</MathInline>, or the output of{" "}
+          <em>another</em>{" "}
+          <MathInline>{String.raw`\operatorname{eml}`}</MathInline> machine.
+          You may plumb machines into each other without limit. That is the
+          entire grammar:
         </p>
-        <pre>
-          <code>{`S → 1 | eml(S, S)`}</code>
-        </pre>
+        <MathBlock>
+          {String.raw`S \;\to\; 1 \;\mid\; \operatorname{eml}(S, S)`}
+        </MathBlock>
         <p>
           Surprisingly, this skeletal grammar is expressive enough to
           reconstruct every function on your calculator. <em>Euler's number{" "}
-          </em> <code>e</code> is not a separate primitive, it is the
-          one-node expression{" "}
-          <code>eml(1, 1) = exp(1) − ln(1) = e</code>. The function{" "}
-          <code>exp(x)</code> becomes <code>eml(x, 1)</code>, because{" "}
-          <code>ln(1) = 0</code> cancels the second term. From there you
-          stack trees to recover everything else.
+          </em> <MathInline>{String.raw`e`}</MathInline> is not a separate
+          primitive, it is the one-node expression{" "}
+          <MathInline>
+            {String.raw`\operatorname{eml}(1, 1) = \exp(1) - \ln(1) = e`}
+          </MathInline>
+          . The function <MathInline>{String.raw`\exp(x)`}</MathInline>{" "}
+          becomes{" "}
+          <MathInline>{String.raw`\operatorname{eml}(x, 1)`}</MathInline>,
+          because <MathInline>{String.raw`\ln(1) = 0`}</MathInline> cancels
+          the second term. From there you stack trees to recover everything
+          else.
         </p>
         <blockquote>
           The operator is tiny. The expressive power sits in how trees
@@ -196,18 +205,20 @@ EML    → 2 primitives   ← eml, 1`}</code>
         <p>
           EML is the continuous-mathematics counterpart. Where NAND reduces
           all Boolean circuits to a single two-input gate,{" "}
-          <code>eml</code> reduces all elementary functions to a single
-          two-input operator. The analogy is precise enough to carry real
-          intuition:
+          <MathInline>{String.raw`\operatorname{eml}`}</MathInline> reduces all
+          elementary functions to a single two-input operator. The analogy is
+          precise enough to carry real intuition:
         </p>
         <ul>
           <li>
-            NAND's truth table ↔ <code>eml</code>'s defining formula{" "}
-            <code>exp(x) − ln(y)</code>.
+            NAND's truth table ↔{" "}
+            <MathInline>{String.raw`\operatorname{eml}`}</MathInline>'s
+            defining formula{" "}
+            <MathInline>{String.raw`\exp(x) - \ln(y)`}</MathInline>.
           </li>
           <li>
             Boolean circuit = tree of NAND gates ↔ elementary function = tree
-            of <code>eml</code> nodes.
+            of <MathInline>{String.raw`\operatorname{eml}`}</MathInline> nodes.
           </li>
           <li>
             Gate count / circuit depth ↔ tree size / tree depth (complexity
@@ -215,7 +226,8 @@ EML    → 2 primitives   ← eml, 1`}</code>
           </li>
           <li>
             NAND's fabrication leverage ↔ EML's hardware potential on{" "}
-            <code>exp</code>/<code>ln</code>-native substrates.
+            <MathInline>{String.raw`\exp`}</MathInline>/
+            <MathInline>{String.raw`\ln`}</MathInline>-native substrates.
           </li>
         </ul>
         <p>
@@ -232,50 +244,59 @@ EML    → 2 primitives   ← eml, 1`}</code>
         <p>
           The fastest way to get the feel of EML is to read a handful of
           trees. Here are five verified decompositions, from trivial to not.
-          Each <code>eml(a, b)</code> below is literally{" "}
-          <code>exp(a) − ln(b)</code>.
+          Each <MathInline>{String.raw`\operatorname{eml}(a, b)`}</MathInline>{" "}
+          below is literally{" "}
+          <MathInline>{String.raw`\exp(a) - \ln(b)`}</MathInline>.
         </p>
 
         <h3 id="ex-e">e, depth 1</h3>
-        <pre>
-          <code>{`e  =  eml(1, 1)
-    =  exp(1) − ln(1)
-    =  e − 0
-    =  e`}</code>
-        </pre>
+        <MathBlock>
+          {String.raw`\begin{aligned}
+e \;&=\; \operatorname{eml}(1, 1) \\
+  \;&=\; \exp(1) - \ln(1) \\
+  \;&=\; e - 0 \\
+  \;&=\; e
+\end{aligned}`}
+        </MathBlock>
         <p>
-          Euler's number costs <em>one</em> <code>eml</code> node. It is
+          Euler's number costs <em>one</em>{" "}
+          <MathInline>{String.raw`\operatorname{eml}`}</MathInline> node. It is
           never an axiom here; it falls out of the operator for free.
         </p>
 
         <h3 id="ex-exp">exp(x), depth 1</h3>
-        <pre>
-          <code>{`exp(x)  =  eml(x, 1)
-        =  exp(x) − ln(1)
-        =  exp(x) − 0`}</code>
-        </pre>
+        <MathBlock>
+          {String.raw`\begin{aligned}
+\exp(x) \;&=\; \operatorname{eml}(x, 1) \\
+        \;&=\; \exp(x) - \ln(1) \\
+        \;&=\; \exp(x) - 0
+\end{aligned}`}
+        </MathBlock>
         <p>
-          The exponential function is one node deep. <code>ln(1) = 0</code>{" "}
-          silences the right branch.
+          The exponential function is one node deep.{" "}
+          <MathInline>{String.raw`\ln(1) = 0`}</MathInline> silences the right
+          branch.
         </p>
 
         <h3 id="ex-zero">0, depth 3</h3>
-        <pre>
-          <code>{`0  =  eml(1, eml(eml(1, 1), 1))
-   =  exp(1) − ln(exp(e) − 0)
-   =  e − e
-   =  0`}</code>
-        </pre>
+        <MathBlock>
+          {String.raw`\begin{aligned}
+0 \;&=\; \operatorname{eml}\bigl(1,\; \operatorname{eml}(\operatorname{eml}(1, 1),\; 1)\bigr) \\
+  \;&=\; \exp(1) - \ln\bigl(\exp(e) - 0\bigr) \\
+  \;&=\; e - e \\
+  \;&=\; 0
+\end{aligned}`}
+        </MathBlock>
         <p>
           The constant zero is not free. It takes three levels of nesting,
           because we have to <em>build</em> the cancellation using only{" "}
-          <code>1</code> as a literal.
+          <MathInline>{String.raw`1`}</MathInline> as a literal.
         </p>
 
         <h3 id="ex-ln">ln(x), depth 3</h3>
-        <pre>
-          <code>{`ln(x)  =  eml(1, eml(eml(1, x), 1))`}</code>
-        </pre>
+        <MathBlock>
+          {String.raw`\ln(x) \;=\; \operatorname{eml}\bigl(1,\; \operatorname{eml}(\operatorname{eml}(1, x),\; 1)\bigr)`}
+        </MathBlock>
         <p>
           The natural log, the operator's own inverse component, lives
           three levels deep. This is the depth-3 form from the paper's main
@@ -283,15 +304,17 @@ EML    → 2 primitives   ← eml, 1`}</code>
         </p>
 
         <h3 id="ex-identity">identity: f(x) = x, depth 4</h3>
-        <pre>
-          <code>{`x  =  eml(1, eml(eml(1, eml(x, 1)), 1))
-   =  ln(exp(x))`}</code>
-        </pre>
+        <MathBlock>
+          {String.raw`\begin{aligned}
+x \;&=\; \operatorname{eml}\bigl(1,\; \operatorname{eml}(\operatorname{eml}(1,\; \operatorname{eml}(x, 1)),\; 1)\bigr) \\
+  \;&=\; \ln(\exp(x))
+\end{aligned}`}
+        </MathBlock>
         <p>
           Even the identity function costs four nested{" "}
-          <code>eml</code> calls, a reminder that the EML tree depth of a
-          function has very little to do with how "simple" it looks in
-          school-book notation.
+          <MathInline>{String.raw`\operatorname{eml}`}</MathInline> calls, a
+          reminder that the EML tree depth of a function has very little to do
+          with how "simple" it looks in school-book notation.
         </p>
 
         <p>
@@ -331,20 +354,22 @@ multiply  : depth 8`}</code>
         <p>
           Symbolic regression systems search over expression trees to fit
           data. The search space is usually indexed by the grammar of
-          allowed operators, typically +, −, ×, ÷, <code>exp</code>,{" "}
-          <code>ln</code>, <code>sin</code>, and so on. A space with{" "}
-          <em>one</em> operator is dramatically smaller, more uniform, and
-          easier to enumerate. Depth becomes a single honest complexity
-          penalty.
+          allowed operators, typically{" "}
+          <MathInline>{String.raw`+,\ -,\ \times,\ \div,\ \exp,\ \ln,\ \sin`}</MathInline>
+          , and so on. A space with <em>one</em> operator is dramatically
+          smaller, more uniform, and easier to enumerate. Depth becomes a
+          single honest complexity penalty.
         </p>
 
         <h3 id="uc-hardware">Analog / log-domain hardware</h3>
         <p>
           Analog computing substrates that implement{" "}
-          <code>exp</code> and <code>log</code> natively (log-domain
+          <MathInline>{String.raw`\exp`}</MathInline> and{" "}
+          <MathInline>{String.raw`\log`}</MathInline> natively (log-domain
           filters, translinear circuits, some photonic systems) already
           like the ingredients of EML. If your physics gives you{" "}
-          <code>exp</code> and <code>ln</code> cheaply, then every
+          <MathInline>{String.raw`\exp`}</MathInline> and{" "}
+          <MathInline>{String.raw`\ln`}</MathInline> cheaply, then every
           elementary function is a wiring problem, not a new piece of
           silicon.
         </p>
@@ -370,7 +395,8 @@ multiply  : depth 8`}</code>
         <h3 id="uc-ml">ML interpretability</h3>
         <p>
           Neural networks learn implicit compositions of{" "}
-          <code>exp</code> and <code>ln</code> whenever they use softmax,
+          <MathInline>{String.raw`\exp`}</MathInline> and{" "}
+          <MathInline>{String.raw`\ln`}</MathInline> whenever they use softmax,
           log-sum-exp, or attention. Framing those learned compositions as
           EML trees gives a handle on <em>what</em> the network is
           computing at a level of abstraction that is strictly finer than
@@ -401,18 +427,22 @@ multiply  : depth 8`}</code>
         </p>
         <p>
           Per-gate cost in silicon is brutal here. ADD is roughly one cycle
-          and a tiny area; MUL is 3–5 cycles. <code>exp</code> and{" "}
-          <code>ln</code> each take ~15–30 cycles and large area (LUT +
-          polynomial, or CORDIC). One EML node is therefore exp + ln + sub,
-          on the order of 30–60 cycles. Now overlay the depths from Table 4:
-          a multiply is depth 8, so an EML-multiply is roughly{" "}
-          <code>8 × 60 = ~480 cycles</code> with 16 transcendentals chained,
-          versus 4 cycles for a conventional MUL. That's a ~100× slowdown
-          and orders of magnitude more area for a single op.
+          and a tiny area; MUL is 3–5 cycles.{" "}
+          <MathInline>{String.raw`\exp`}</MathInline> and{" "}
+          <MathInline>{String.raw`\ln`}</MathInline> each take ~15–30 cycles
+          and large area (LUT + polynomial, or CORDIC). One EML node is
+          therefore exp + ln + sub, on the order of 30–60 cycles. Now overlay
+          the depths from Table 4: a multiply is depth 8, so an EML-multiply
+          is roughly{" "}
+          <MathInline>{String.raw`8 \times 60 \approx 480 \text{ cycles}`}</MathInline>{" "}
+          with 16 transcendentals chained, versus 4 cycles for a conventional
+          MUL. That's a ~100× slowdown and orders of magnitude more area for
+          a single op.
         </p>
         <p>
           Numerical stability is the second knife. Every EML node stacks an{" "}
-          <code>exp</code> over a <code>ln</code>; a depth-8 multiply
+          <MathInline>{String.raw`\exp`}</MathInline> over a{" "}
+          <MathInline>{String.raw`\ln`}</MathInline>; a depth-8 multiply
           composes 16 transcendentals, each injecting roughly one ULP of
           error. IEEE-754 add/mul guarantees 0.5 ULP. EML-composed multiply
           has no such bound. So an EML calculator wouldn't just be slower;
@@ -444,21 +474,27 @@ multiply  : depth 8`}</code>
         </p>
         <ul>
           <li>
-            <code>add</code> needs a carry-propagate network. ~log(n) gate
-            delays. No known faster way.
+            <MathInline>{String.raw`\mathrm{add}`}</MathInline> needs a
+            carry-propagate network.{" "}
+            <MathInline>{String.raw`\sim \log(n)`}</MathInline> gate delays.
+            No known faster way.
           </li>
           <li>
-            <code>exp</code> / <code>ln</code> need range reduction +
+            <MathInline>{String.raw`\exp`}</MathInline> /{" "}
+            <MathInline>{String.raw`\ln`}</MathInline> need range reduction +
             polynomial / LUT evaluation. <em>Mathematically irreducible</em>:
             {" "}no chip redesign changes the fact that a 53-bit{" "}
-            <code>exp</code> requires more work than a 53-bit add.
+            <MathInline>{String.raw`\exp`}</MathInline> requires more work
+            than a 53-bit add.
           </li>
         </ul>
         <p>
           No silicon arrangement gets you below{" "}
-          <code>(exp_cost + ln_cost + sub_cost) &gt; add_cost</code>. That's
-          a fundamental lower bound, not an engineering limitation. The
-          gains from co-design, simpler decoder, no structural hazards,
+          <MathInline>
+            {String.raw`\mathrm{exp\_cost} + \mathrm{ln\_cost} + \mathrm{sub\_cost} \;>\; \mathrm{add\_cost}`}
+          </MathInline>
+          . That's a fundamental lower bound, not an engineering limitation.
+          The gains from co-design, simpler decoder, no structural hazards,
           smaller compiler backend, are real but maybe ~10–20% of total
           chip cost. You can't co-design your way out of a two-orders-of-
           magnitude hole with 20% gains.
@@ -488,19 +524,23 @@ multiply  : depth 8`}</code>
         <ul>
           <li>
             <strong>Analog / log-domain circuits.</strong> The transistor
-            I-V curve is literally exponential, so <code>exp</code> and{" "}
-            <code>ln</code> are essentially free at the device boundary.
-            Translinear circuits, Gilbert cells, log-domain filters, EML
-            primitives fit naturally. Tradeoff: ~8-bit effective precision,
-            unsuitable for IEEE 754, potentially attractive for low-precision
-            ML inference.
+            I-V curve is literally exponential, so{" "}
+            <MathInline>{String.raw`\exp`}</MathInline> and{" "}
+            <MathInline>{String.raw`\ln`}</MathInline> are essentially free
+            at the device boundary. Translinear circuits, Gilbert cells,
+            log-domain filters, EML primitives fit naturally. Tradeoff:
+            ~8-bit effective precision, unsuitable for IEEE 754, potentially
+            attractive for low-precision ML inference.
           </li>
           <li>
             <strong>Workloads that are already mostly transcendentals.</strong>
             {" "}Bayesian inference, certain physics simulations, attention
-            variants. If you're paying for <code>exp</code>/<code>ln</code>{" "}
-            anyway, the EML pair isn't extra cost. But you'd just expose{" "}
-            <code>exp</code> and <code>ln</code> directly, no reason to
+            variants. If you're paying for{" "}
+            <MathInline>{String.raw`\exp`}</MathInline>/
+            <MathInline>{String.raw`\ln`}</MathInline> anyway, the EML pair
+            isn't extra cost. But you'd just expose{" "}
+            <MathInline>{String.raw`\exp`}</MathInline> and{" "}
+            <MathInline>{String.raw`\ln`}</MathInline> directly, no reason to
             funnel everything through the EML composition.
           </li>
         </ul>
@@ -528,20 +568,24 @@ multiply  : depth 8`}</code>
           <li>
             <strong>Canonical forms.</strong> Two different EML trees can
             represent the same function (because{" "}
-            <code>ln(exp(x)) = x</code>, etc.). What is the right canonical
-            form? Is there a confluent rewrite system?
+            <MathInline>{String.raw`\ln(\exp(x)) = x`}</MathInline>, etc.).
+            What is the right canonical form? Is there a confluent rewrite
+            system?
           </li>
           <li>
-            <strong>Numerical stability.</strong> <code>exp</code> blows up
-            fast; <code>ln</code> hates non-positive inputs. Evaluating a
-            deep EML tree naively is a recipe for overflow. Are there
-            reformulations, log-domain, interval-arithmetic, mixed
-            precision, that keep the algebra but stabilize the arithmetic?
+            <strong>Numerical stability.</strong>{" "}
+            <MathInline>{String.raw`\exp`}</MathInline> blows up fast;{" "}
+            <MathInline>{String.raw`\ln`}</MathInline> hates non-positive
+            inputs. Evaluating a deep EML tree naively is a recipe for
+            overflow. Are there reformulations, log-domain,
+            interval-arithmetic, mixed precision, that keep the algebra but
+            stabilize the arithmetic?
           </li>
           <li>
             <strong>Sheffer-stroke cousins.</strong> Are there other
-            two-argument operators over ℝ with the same completeness
-            property? If so, which one is "best"?
+            two-argument operators over{" "}
+            <MathInline>{String.raw`\mathbb{R}`}</MathInline> with the same
+            completeness property? If so, which one is "best"?
           </li>
           <li>
             <strong>Beyond elementary.</strong> Can the idea be extended
