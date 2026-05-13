@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { library } from "@/lib/eml/library";
 import { articles } from "@/lib/kb/articles";
 
+export const dynamic = "force-static";
+
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://prashantbsr.github.io/emlinteractive";
 
